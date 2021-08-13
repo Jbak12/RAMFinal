@@ -10,8 +10,10 @@ import Alamofire
 import AlamofireImage
 
 class CharacterViewController: UIViewController, CharacterViewControllerType {
+    
     var myView : CharacterView!
     var viewModel : CharacterViewViewModelType
+    //var characters = []()
     
     required init(viewModel: CharacterViewViewModelType) {
         self.viewModel = viewModel
@@ -34,7 +36,8 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         self.myView.characterLabel.text = self.viewModel.name
         if let url = self.viewModel.imageUrl {
             self.myView.characterImage.af.setImage(withURL: url, placeholderImage: UIImage(named: "ogurek"), imageTransition: .crossDissolve(1.0)) { result in
-                
+                self.myView.drawButton.isEnabled = true
+                self.myView.drawButton.backgroundColor = .buttonBackground
             }
         }
         self.myView.genderLabel.gender(self.viewModel.gender)
@@ -43,6 +46,7 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         self.myView.episodesLabel.episodes(episodes: self.viewModel.episodeCounter)
         self.myView.originLabel.originLocation(locationName: self.viewModel.originLocationName, gender: self.viewModel.gender)
         self.myView.statusLabel.liveStatus(status: self.viewModel.status)
+        //self.characters.append(self.viewModel.)
         //self.myView.button.isEnabled = true
     }
     

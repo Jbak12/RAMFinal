@@ -22,7 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewModel = CharacterViewModel()
         let vc = CharacterViewController(viewModel: viewModel)
         vc.title = "VC"
-
+        
+        let tableview = CharactersTableViewController()
+        
         let viewModel2 = CharacterViewModelMock()
         let vc2 = CharacterViewController(viewModel: viewModel2)
         vc2.title = "VC2"

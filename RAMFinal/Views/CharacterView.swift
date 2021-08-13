@@ -152,7 +152,7 @@ class CharacterView: UIView {
         self.drawButton.translatesAutoresizingMaskIntoConstraints = false
         self.drawButton.setTitle("DRAW", for: .normal)
         self.drawButton.addTarget(self, action: #selector(drawButtonPressed(_:)), for: .touchUpInside)
-        self.drawButton.backgroundColor = UIColor(red: 0.31, green: 0.8, blue: 0.497, alpha: 0.7)
+        self.drawButton.backgroundColor = .buttonBackground
         self.drawButton.layer.cornerRadius = 10
         self.drawButton.setTitle("OFF", for: .disabled)
         //self.drawButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -167,7 +167,7 @@ class CharacterView: UIView {
         self.AddToCollectionButton.translatesAutoresizingMaskIntoConstraints = false
         self.AddToCollectionButton.setTitle("SAVE", for: .normal)
         //self.AddToCollectionButton.addTarget(self, action: #selector(drawButtonPressed(_:)), for: .touchUpInside)
-        self.AddToCollectionButton.backgroundColor = UIColor(red: 0.31, green: 0.8, blue: 0.497, alpha: 0.7)
+        self.AddToCollectionButton.backgroundColor = .buttonBackground
         self.AddToCollectionButton.layer.cornerRadius = 10
         self.AddToCollectionButton.setTitle("OFF", for: .disabled)
         //self.drawButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -200,6 +200,7 @@ class CharacterView: UIView {
         //self.drawButton.isEnabled = false
         self.onButtonPress?()
         self.drawButton.isEnabled = false
+        self.drawButton.backgroundColor = .gray
     }
 }
 

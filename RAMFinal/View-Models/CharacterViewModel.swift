@@ -1,14 +1,21 @@
 import UIKit
-
+import Alamofire
 class CharacterViewModel: CharacterViewViewModelType {
     
     weak var output: CharacterViewControllerType?
+    
+    private var Odcinek: Episode?{
+        didSet{
+            self.output?.reloadView()
+        }
+    }
     
     private var ziomal : Character? {
         didSet {
             self.output?.reloadView()
         }
     }
+    
     
     var name: String?{
         return ziomal?.name
@@ -58,6 +65,22 @@ class CharacterViewModel: CharacterViewViewModelType {
         }
     }
     
+    var firstEpisode: String{
+        if let numerOdcinka = Odcinek?.episode{
+            return numerOdcinka
+        }else{
+            return "jezu nie wiem co rovic"
+        }
+    }
+    var firstEpisodeName: String{
+        if let odcinkaimie = Odcinek?.name{
+            return odcinkaimie
+        }else{
+            return"AAAAAAAA"
+        }
+    }
+    
+    
     var dataManager = DataManager()
     
     private func fetchData() {
@@ -70,7 +93,27 @@ class CharacterViewModel: CharacterViewViewModelType {
             }
         }
     }
-    
+    private func fetchEpisodeName(episodeUrl: String){
+        AF.request(episodeUrl).response(queue: .main){ response in
+            switch response.result {
+            case .failure(let error):
+                print(error.localizedDescription)
+                return
+            case .success(let data):
+                if let data = data {
+                    do {
+                        let odcinek = try JSONDecoder().decode(Episode.self, from: data)
+                        self.Odcinek = odcinek
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            
+            
+        }
+    }
+    //unc fetchzioal
     func outputIsReadyForData() {
         fetchData()
         self.output?.reloadView()
