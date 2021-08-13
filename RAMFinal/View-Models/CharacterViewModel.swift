@@ -29,6 +29,34 @@ class CharacterViewModel: CharacterViewViewModelType {
         }
         
     }
+    var species: String {
+        if let species = ziomal?.species{
+            return species
+        }else{
+            return "no species"
+        }
+    }
+    var episodeCounter: Int{
+        if let episodecount = ziomal?.episode.count{
+            return episodecount
+        }else{
+            return 2137
+        }
+    }
+    var originLocationName: String{
+        if let originlocation = ziomal?.origin.name{
+            return originlocation
+        }else{
+            return "ebebebe"
+        }
+    }
+    var status : String{
+        if let status = ziomal?.status{
+            return status.rawValue
+        }else{
+           return "dfgsgdffsdgd"
+        }
+    }
     
     var dataManager = DataManager()
     
@@ -44,7 +72,7 @@ class CharacterViewModel: CharacterViewViewModelType {
     }
     
     func outputIsReadyForData() {
-        self.output?.reloadView()
         fetchData()
+        self.output?.reloadView()
     }
 }

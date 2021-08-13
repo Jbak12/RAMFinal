@@ -58,5 +58,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>data-unifon.ttf</string>
+		<string>data-latin.ttf</string>
+	</array>
 </dict>
 </plist>

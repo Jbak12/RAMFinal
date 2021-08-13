@@ -19,7 +19,10 @@ protocol CharacterViewViewModelType: AnyObject {
     var name: String? { get }
     var imageUrl: URL? { get }
     var gender: String { get }
-    
+    var species: String { get }
+    var episodeCounter: Int {get}
+    var originLocationName: String {get}
+    var status: String {get}
     func outputIsReadyForData()
 }
 

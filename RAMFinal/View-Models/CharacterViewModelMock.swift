@@ -8,7 +8,7 @@
 import Foundation
 
 class CharacterViewModelMock: CharacterViewViewModelType {
-    
+    var status: String = "cooo"
     var gender: String = "Male"
     
     var output: CharacterViewControllerType?
@@ -17,6 +17,11 @@ class CharacterViewModelMock: CharacterViewViewModelType {
     
     var imageUrl: URL?
     
+    var species: String = "Alien"
+    
+    var episodeCounter: Int = 2
+    
+    var originLocationName = "jkdfhskjkgbf"
     
     func outputIsReadyForData() {
         self.name = "Kuba"

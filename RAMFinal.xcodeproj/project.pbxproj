@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84404BAF26C5676200625AB9 /* data-latin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84404BAE26C5676200625AB9 /* data-latin.ttf */; };
+		84404BB126C5683B00625AB9 /* data-unifon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84404BB026C5676800625AB9 /* data-unifon.ttf */; };
 		8468CE5926BD456C001F73FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468CE5826BD456C001F73FA /* AppDelegate.swift */; };
 		8468CE5B26BD456C001F73FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468CE5A26BD456C001F73FA /* SceneDelegate.swift */; };
 		8468CE5D26BD456C001F73FA /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468CE5C26BD456C001F73FA /* CharacterViewController.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84404BAE26C5676200625AB9 /* data-latin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "data-latin.ttf"; path = "../../../Downloads/data-control 2/data-latin.ttf"; sourceTree = "<group>"; };
+		84404BB026C5676800625AB9 /* data-unifon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "data-unifon.ttf"; path = "../../../Downloads/data-control 2/data-unifon.ttf"; sourceTree = "<group>"; };
 		8468CE5526BD456C001F73FA /* RAMFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RAMFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8468CE5826BD456C001F73FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8468CE5A26BD456C001F73FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,11 +70,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84404BA926C5630100625AB9 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				84404BAE26C5676200625AB9 /* data-latin.ttf */,
+				84404BB026C5676800625AB9 /* data-unifon.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		8468CE4C26BD456C001F73FA = {
 			isa = PBXGroup;
 			children = (
 				8468CE5726BD456C001F73FA /* RAMFinal */,
 				8468CE5626BD456C001F73FA /* Products */,
+				84404BA926C5630100625AB9 /* fonts */,
 				85AEED43BA1EC384B32FE0DF /* Pods */,
 				9E0734D0205E98A45409FD86 /* Frameworks */,
 			);
@@ -107,6 +121,7 @@
 				8468CE5826BD456C001F73FA /* AppDelegate.swift */,
 				8468CE5A26BD456C001F73FA /* SceneDelegate.swift */,
 				8468CE8026BD4A3F001F73FA /* Extensions.swift */,
+				8468CE7E26BD494A001F73FA /* Protocols.swift */,
 			);
 			path = AppAndSceneDelegate;
 			sourceTree = "<group>";
@@ -136,7 +151,6 @@
 				8468CE7626BD48F8001F73FA /* Character.swift */,
 				8468CE7A26BD491F001F73FA /* Episode.swift */,
 				8468CE7C26BD4937001F73FA /* Location.swift */,
-				8468CE7E26BD494A001F73FA /* Protocols.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -235,7 +249,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8468CE6826BD456D001F73FA /* LaunchScreen.storyboard in Resources */,
+				84404BB126C5683B00625AB9 /* data-unifon.ttf in Resources */,
 				8468CE6526BD456D001F73FA /* Assets.xcassets in Resources */,
+				84404BAF26C5676200625AB9 /* data-latin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

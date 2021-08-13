@@ -37,8 +37,13 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
                 
             }
         }
-        
-        self.myView.genderLabel.text = self.viewModel.gender
+        self.myView.genderLabel.gender(self.viewModel.gender)
+        self.myView.characterLabel.changeFormat()
+        self.myView.speciesLabel.species(species: self.viewModel.species)
+        self.myView.episodesLabel.episodes(episodes: self.viewModel.episodeCounter)
+        self.myView.originLabel.originLocation(locationName: self.viewModel.originLocationName, gender: self.viewModel.gender)
+        self.myView.statusLabel.liveStatus(status: self.viewModel.status)
+        //self.myView.button.isEnabled = true
     }
     
     override func loadView() {
