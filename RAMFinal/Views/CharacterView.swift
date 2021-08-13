@@ -199,6 +199,7 @@ class CharacterView: UIView {
     @objc private func drawButtonPressed(_ sender: Any) {
         //self.drawButton.isEnabled = false
         self.onButtonPress?()
+        self.drawButton.isEnabled = false
     }
 }
 
