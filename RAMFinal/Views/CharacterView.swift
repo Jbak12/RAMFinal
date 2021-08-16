@@ -105,6 +105,8 @@ class CharacterView: UIView {
         self.speciesLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
         self.speciesLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
+        //jhbdfjdfjdsfjhzbvdjsb vjhlbdhbzdfjhbdjzbdf
+        
         //labelka od ilosci odcinkow
         self.stackView.addArrangedSubview(self.episodesLabel)
         self.episodesLabel.translatesAutoresizingMaskIntoConstraints = false
