@@ -107,19 +107,21 @@ class CharacterViewModel: CharacterViewViewModelType {
         firstly {
             dataManager.getPage(1, type: Character.self)
         }.then { firstPage -> Promise<Page<Character>> in
-            self.dataManager.getPage(Int.random(in: 1...firstPage.info.pages), type: Character.self)
+            let randomPageNumber = Int.random(in: 1...firstPage.info.pages)
+            print(randomPageNumber)
+            return self.dataManager.getPage(randomPageNumber, type: Character.self)
         }.then { nextRandomPage -> Promise<Episode> in
-            let randomCharacterNo = Int.random(in: 1..<nextRandomPage.results.count)
+            let randomCharacterNo = Int.random(in: 0..<nextRandomPage.results.count)
             let randomCharacter = nextRandomPage.results[randomCharacterNo]
             self.ziomal = randomCharacter
-            
+            print(randomCharacterNo)
             return self.dataManager.getEpisode(episodeUrl: self.ziomal!.episode[0])
         }.ensure {
-            self.output?.setLoading(isLoading: false)
+             self.output?.setLoading(isLoading: false)
         }.done { episode in
-            self.odcinek = episode
+            return self.odcinek = episode
         }.catch { error in
-            self.output?.showError(mesasge: error.localizedDescription)
+             self.output?.showError(mesasge: error.localizedDescription)
         }
     }
         

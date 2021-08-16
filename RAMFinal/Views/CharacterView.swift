@@ -107,6 +107,7 @@ class CharacterView: UIView {
         self.speciesLabel.textAlignment = .center
         self.speciesLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
         self.speciesLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        self.speciesLabel.numberOfLines = 0
         
         //jhbdfjdfjdsfjhzbvdjsb vjhlbdhbzdfjhbdjzbdf
         
