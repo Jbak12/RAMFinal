@@ -53,6 +53,7 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         self.myView.originLabel.originLocation(locationName: self.viewModel.originLocationName, gender: self.viewModel.gender)
         self.myView.statusLabel.liveStatus(status: self.viewModel.status)
         self.myView.firstEpisodeLabel.FirstAppeared(firstEpisode: self.viewModel.firstEpisode)
+       
         let desiredOffset = CGPoint(x: 0, y: -myView.scrollView.contentInset.top)
         self.myView.scrollView.setContentOffset(desiredOffset, animated: true)
         //self.characters.append(self.viewModel.)

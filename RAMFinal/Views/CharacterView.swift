@@ -191,6 +191,13 @@ class CharacterView: UIView {
         self.drawButton.layer.cornerRadius = 10
         self.drawButton.setTitle("OFF", for: .disabled)
         
+
+        
+//        let tap1 = UITapGestureRecognizer(target: self, action: #selector(saveButtonPressed(_:)))
+//        tap1.numberOfTapsRequired = 2
+//        self.saveButton.addGestureRecognizer(tap1)
+        
+        
         //przycisk od zapisywania ziomali
         self.buttonsStackView.addArrangedSubview(saveButton)
         self.saveButton.translatesAutoresizingMaskIntoConstraints = false
@@ -200,7 +207,11 @@ class CharacterView: UIView {
         self.saveButton.layer.cornerRadius = 10
         self.saveButton.setTitle("OFF", for: .disabled)
         //self.drawButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.saveButton.addTarget(self, action: #selector(saveButtonPressed(_:)), for: .touchUpInside)
+        self.saveButton.addTarget(self, action: #selector(wypisz), for: .touchUpInside)
+        //DOUBLE TAP
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(saveButtonPressed(_:)))
+        tap2.numberOfTapsRequired = 2
+        self.saveButton.addGestureRecognizer(tap2)
         
         
     }
@@ -210,6 +221,9 @@ class CharacterView: UIView {
         self.onDrawButtonPress?()
 //        self.drawButton.isEnabled = false
         self.drawButton.backgroundColor = .gray
+    }
+    @objc private func wypisz(){
+        print("cokolwiek")
     }
     
     @objc private func saveButtonPressed(_ sender: Any) {
