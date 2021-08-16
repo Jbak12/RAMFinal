@@ -2,6 +2,7 @@ PODS:
   - Alamofire (5.4.3)
   - AlamofireImage (4.2.0):
     - Alamofire (~> 5.4)
+  - MBProgressHUD (1.2.0)
   - PromiseKit (6.15.3):
     - PromiseKit/CorePromise (= 6.15.3)
     - PromiseKit/Foundation (= 6.15.3)
@@ -15,19 +16,22 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
+  - MBProgressHUD
   - PromiseKit
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
+    - MBProgressHUD
     - PromiseKit
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
 
-PODFILE CHECKSUM: 9795e6fd9b181cd251f206e94d5c5d55633147b5
+PODFILE CHECKSUM: 5742ffda2b4f5a5b457e75310d48de257e9d8c36
 
 COCOAPODS: 1.10.2

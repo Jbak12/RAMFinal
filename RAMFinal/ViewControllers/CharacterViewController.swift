@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import MBProgressHUD
 
 class CharacterViewController: UIViewController, CharacterViewControllerType {
     
@@ -27,8 +28,13 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     }
     
     func bindViewWithController() {
-        self.myView.onButtonPress = { [weak self] in
-            self?.viewModel.outputIsReadyForData()
+        self.myView.onDrawButtonPress = { [weak self] in
+            self?.viewModel.drawData()
+        }
+        
+        self.myView.onSaveButtonPress = { [weak self] in
+            let vc = CharactersTableViewController()
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -46,8 +52,26 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         self.myView.episodesLabel.episodes(episodes: self.viewModel.episodeCounter)
         self.myView.originLabel.originLocation(locationName: self.viewModel.originLocationName, gender: self.viewModel.gender)
         self.myView.statusLabel.liveStatus(status: self.viewModel.status)
+        self.myView.firstEpisodeLabel.FirstAppeared(firstEpisode: self.viewModel.firstEpisode)
         //self.characters.append(self.viewModel.)
         //self.myView.button.isEnabled = true
+    }
+    
+    func setLoading(isLoading: Bool) {
+        self.myView.drawButton.isEnabled = !isLoading
+        
+        if isLoading {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        } else {
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
+    
+    func showError(mesasge: String) {
+        let alert = UIAlertController(title: nil, message: mesasge, preferredStyle: .alert)
+        let action = UIAlertAction(title: "ok", style: .cancel, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func loadView() {
@@ -58,13 +82,13 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel.outputIsReadyForData()
+        self.viewModel.drawData()
         self.bindViewWithController()
     }
     
-    
-//bnlnknasdfidasnifndiu
-    //"cokolwiek tesdffdknjkd"
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
 }
 

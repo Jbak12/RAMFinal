@@ -3,11 +3,12 @@ import UIKit
 
 class CharacterView: UIView {
     
-    var onButtonPress: (() -> Void)?
+    var onDrawButtonPress: (() -> Void)?
+    var onSaveButtonPress: (() -> Void)?
     
     lazy var scrollView = UIScrollView()
     lazy var stackView = UIStackView()
-    lazy var stackView2 = UIStackView()
+    lazy var buttonsStackView = UIStackView()
     
     var characterImage = UIImageView(){
         didSet{
@@ -22,9 +23,10 @@ class CharacterView: UIView {
     lazy var episodesLabel = UILabel()
     lazy var originLabel = UILabel()
     lazy var statusLabel = UILabel()
+    lazy var firstEpisodeLabel = UILabel()
     
     lazy var drawButton = UIButton()
-    private lazy var AddToCollectionButton = UIButton()
+    private lazy var saveButton = UIButton()
     
     
     override init(frame: CGRect) {
@@ -41,13 +43,25 @@ class CharacterView: UIView {
         
         self.backgroundColor = UIColor(red: 0.31, green: 0.488, blue: 0.497, alpha: 1)
         
+        //labelka od imienia
+        self.addSubview(self.characterLabel)
+        self.characterLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.characterLabel.textAlignment = .center
+        self.characterLabel.backgroundColor = .basicBackground
+        self.characterLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.characterLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.characterLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        self.characterLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        self.characterLabel.font = self.characterLabel.font.withSize(40.0)
+        self.characterLabel.font = UIFont.init(name: "data-latin", size: 25.0)
+        self.characterLabel.numberOfLines = 0
+        
         self.addSubview(scrollView)
         self.scrollView.delegate = self
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
-        self.scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.scrollView.topAnchor.constraint(equalTo: self.characterLabel.bottomAnchor).isActive = true
         self.scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
         self.scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        self.scrollView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.85).isActive = true
 //        self.scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: - ).isActive = true
         
         self.scrollView.addSubview(stackView)
@@ -56,23 +70,12 @@ class CharacterView: UIView {
         self.stackView.spacing = 30.0
         self.stackView.distribution = .equalSpacing
         self.stackView.alignment = .center
-        self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor).isActive = true
+        self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 30.0).isActive = true
         self.stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor).isActive = true
         self.stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor).isActive = true
-        self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
+        self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -30.0).isActive = true
         self.stackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor).isActive = true
         
-        //labelka od imienia
-        self.stackView.addArrangedSubview(self.characterLabel)
-        self.characterLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.characterLabel.textAlignment = .center
-        self.characterLabel.backgroundColor = .basicBackground
-        self.characterLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.characterLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        self.characterLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        self.characterLabel.font = self.characterLabel.font.withSize(40.0)
-        self.characterLabel.font = UIFont.init(name: "data-latin", size: 25.0)
-        self.characterLabel.numberOfLines = 0
 //      characterLabel.topAnchor.constraint(equalTo: characterImage.bottomAnchor, constant: 30.0).isActive = true
 
         
@@ -135,85 +138,70 @@ class CharacterView: UIView {
         self.statusLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
         self.statusLabel.numberOfLines = 0
         self.statusLabel.heightAnchor.constraint(greaterThanOrEqualTo: self.episodesLabel.heightAnchor).isActive = true
-                
-        self.addSubview(stackView2)
-        self.stackView2.translatesAutoresizingMaskIntoConstraints = false
-        self.stackView2.axis = .horizontal
-        self.stackView2.spacing = 0
-        self.stackView2.distribution = .equalSpacing
-        self.stackView2.alignment = .center
-        self.stackView2.topAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
-        self.stackView2.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor).isActive = true
-        self.stackView2.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor).isActive = true
-        self.stackView2.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        self.stackView2.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        
+        //Labelka od pierwszego pojawienia sie
+        self.stackView.addArrangedSubview(self.firstEpisodeLabel)
+        self.firstEpisodeLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.firstEpisodeLabel.contentMode = .scaleAspectFit
+        self.firstEpisodeLabel.backgroundColor = .basicBackground
+        self.firstEpisodeLabel.textAlignment = .center
+        self.firstEpisodeLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
+        self.firstEpisodeLabel.numberOfLines = 0
+        self.firstEpisodeLabel.heightAnchor.constraint(greaterThanOrEqualTo: self.episodesLabel.heightAnchor).isActive = true
+        
+        self.addSubview(buttonsStackView)
+        self.buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.buttonsStackView.axis = .horizontal
+        self.buttonsStackView.spacing = 0
+        self.buttonsStackView.distribution = .fillEqually
+        self.buttonsStackView.alignment = .center
+        self.buttonsStackView.topAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
+        self.buttonsStackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor).isActive = true
+        self.buttonsStackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor).isActive = true
+        self.buttonsStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        self.buttonsStackView.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        self.buttonsStackView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
 
         
         //przycisk od losowania ziomali
-        self.stackView2.addArrangedSubview(drawButton)
+        self.buttonsStackView.addArrangedSubview(drawButton)
         self.drawButton.translatesAutoresizingMaskIntoConstraints = false
         self.drawButton.setTitle("DRAW", for: .normal)
         self.drawButton.addTarget(self, action: #selector(drawButtonPressed(_:)), for: .touchUpInside)
         self.drawButton.backgroundColor = .buttonBackground
         self.drawButton.layer.cornerRadius = 10
         self.drawButton.setTitle("OFF", for: .disabled)
-        //self.drawButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.drawButton.topAnchor.constraint(equalTo: self.stackView2.topAnchor).isActive = true
-        self.drawButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        self.drawButton.widthAnchor.constraint(equalTo: self.stackView2.widthAnchor,multiplier: 0.5).isActive = true
-        self.drawButton.leadingAnchor.constraint(equalTo: self.stackView2.leadingAnchor).isActive = true
-        //self.drawButton.trailingAnchor.constraint(equalTo: self.stackView2.trailingAnchor).isActive = true
         
         //przycisk od zapisywania ziomali
-        self.stackView2.addArrangedSubview(AddToCollectionButton)
-        self.AddToCollectionButton.translatesAutoresizingMaskIntoConstraints = false
-        self.AddToCollectionButton.setTitle("SAVE", for: .normal)
+        self.buttonsStackView.addArrangedSubview(saveButton)
+        self.saveButton.translatesAutoresizingMaskIntoConstraints = false
+        self.saveButton.setTitle("SAVE", for: .normal)
         //self.AddToCollectionButton.addTarget(self, action: #selector(drawButtonPressed(_:)), for: .touchUpInside)
-        self.AddToCollectionButton.backgroundColor = .buttonBackground
-        self.AddToCollectionButton.layer.cornerRadius = 10
-        self.AddToCollectionButton.setTitle("OFF", for: .disabled)
+        self.saveButton.backgroundColor = .buttonBackground
+        self.saveButton.layer.cornerRadius = 10
+        self.saveButton.setTitle("OFF", for: .disabled)
         //self.drawButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.AddToCollectionButton.topAnchor.constraint(equalTo: self.stackView2.topAnchor).isActive = true
-        self.AddToCollectionButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        self.AddToCollectionButton.widthAnchor.constraint(equalTo: self.stackView2.widthAnchor,multiplier: 0.5).isActive = true
-        self.AddToCollectionButton.leadingAnchor.constraint(equalTo: self.drawButton.trailingAnchor).isActive = true
-        self.AddToCollectionButton.trailingAnchor.constraint(equalTo: self.stackView2.trailingAnchor).isActive = true
-        
-
-        
-       
-        
-        
-        
-        
-        
-//        self.stackView.addArrangedSubview(self.AddToCollectionButton)
-//        self.AddToCollectionButton.translatesAutoresizingMaskIntoConstraints = false
-//        self.AddToCollectionButton.setTitle("Dodaj ziomala do kolekcji", for: .normal)
-//        self.AddToCollectionButton.backgroundColor = .green
-//        self.AddToCollectionButton.layer.cornerRadius = 10
-//        self.AddToCollectionButton.layer.borderWidth = 1
-//        self.AddToCollectionButton.layer.borderColor = UIColor.black.cgColor
+        self.saveButton.addTarget(self, action: #selector(saveButtonPressed(_:)), for: .touchUpInside)
         
         
     }
     
     @objc private func drawButtonPressed(_ sender: Any) {
         //self.drawButton.isEnabled = false
-        self.onButtonPress?()
-        self.drawButton.isEnabled = false
+        self.onDrawButtonPress?()
+//        self.drawButton.isEnabled = false
         self.drawButton.backgroundColor = .gray
+    }
+    
+    @objc private func saveButtonPressed(_ sender: Any) {
+        self.onSaveButtonPress?()
     }
 }
 
 extension CharacterView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("Content offset y: \(scrollView.contentOffset.y)")
+//        print("Content offset y: \(scrollView.contentOffset.y)")
     }
-    
-//    func setButtonsInput(_ isEnabled: Bool) {
-//        self.drawButton.isEnabled = isEnabled
-//    }
-    
+   
 }

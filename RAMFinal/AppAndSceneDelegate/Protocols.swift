@@ -23,11 +23,15 @@ protocol CharacterViewViewModelType: AnyObject {
     var episodeCounter: Int {get}
     var originLocationName: String {get}
     var status: String {get}
-    func outputIsReadyForData()
+    var firstEpisode: String {get}
+    
+    func drawData()
 }
 
 protocol CharacterViewControllerType: AnyObject {
     init(viewModel: CharacterViewViewModelType)
 
     func reloadView()
+    func setLoading(isLoading: Bool)
+    func showError(mesasge: String)
 }

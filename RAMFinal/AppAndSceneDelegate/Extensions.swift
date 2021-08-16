@@ -44,6 +44,9 @@ extension UILabel{
             self.text = "This character is \(status) "
         }
     }
+    func FirstAppeared(firstEpisode: String){
+        self.text = "First Appeared on \(firstEpisode)"
+    }
 }
 
 

@@ -7,6 +7,7 @@ target 'RAMFinal' do
 	pod 'Alamofire'
 	pod 'AlamofireImage'
 	pod 'PromiseKit'
+  pod 'MBProgressHUD'
   # Pods for RAMFinal
 
 end

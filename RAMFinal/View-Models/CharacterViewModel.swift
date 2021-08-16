@@ -1,10 +1,11 @@
 import UIKit
 import Alamofire
-class CharacterViewModel: CharacterViewViewModelType {
-    
+import PromiseKit
+
+class CharacterViewModel: CharacterViewViewModelType {   
     weak var output: CharacterViewControllerType?
     
-    private var Odcinek: Episode?{
+    private var odcinek: Episode? {
         didSet{
             self.output?.reloadView()
         }
@@ -47,7 +48,7 @@ class CharacterViewModel: CharacterViewViewModelType {
         if let episodecount = ziomal?.episode.count{
             return episodecount
         }else{
-            return 2137
+            return 1234
         }
     }
     var originLocationName: String{
@@ -66,14 +67,14 @@ class CharacterViewModel: CharacterViewViewModelType {
     }
     
     var firstEpisode: String{
-        if let numerOdcinka = Odcinek?.episode{
+        if let numerOdcinka = odcinek?.episode{
             return numerOdcinka
         }else{
             return "jezu nie wiem co rovic"
         }
     }
     var firstEpisodeName: String{
-        if let odcinkaimie = Odcinek?.name{
+        if let odcinkaimie = odcinek?.name{
             return odcinkaimie
         }else{
             return"AAAAAAAA"
@@ -83,39 +84,49 @@ class CharacterViewModel: CharacterViewViewModelType {
     
     var dataManager = DataManager()
     
-    private func fetchData() {
-        dataManager.getPage(1, type: Character.self){ page in
-            let randomPageNo = Int.random(in: 1...page.info.pages)
-            self.dataManager.getPage(randomPageNo, type: Character.self) { randomPage in
-                let randomCharacterNo = Int.random(in: 1..<randomPage.results.count)
-                let randomCharacter = randomPage.results[randomCharacterNo]
-                self.ziomal = randomCharacter
-            }
-        }
-    }
-    private func fetchEpisodeName(episodeUrl: String){
-        AF.request(episodeUrl).response(queue: .main){ response in
-            switch response.result {
-            case .failure(let error):
-                print(error.localizedDescription)
-                return
-            case .success(let data):
-                if let data = data {
-                    do {
-                        let odcinek = try JSONDecoder().decode(Episode.self, from: data)
-                        self.Odcinek = odcinek
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                }
-            }
-            
-            
-        }
-    }
+//    private func fetchData() {
+//        dataManager.getPage(1, type: Character.self){ page in
+//            let randomPageNo = Int.random(in: 1...page.info.pages)
+//            self.dataManager.getPage(randomPageNo, type: Character.self) { randomPage in
+//                let randomCharacterNo = Int.random(in: 1..<randomPage.results.count)
+//                let randomCharacter = randomPage.results[randomCharacterNo]
+//                self.ziomal = randomCharacter
+//            }
+//        }
+//    }
+//    private func fetchEpisodeName(episodeUrl: String) {
+//        dataManager.getEpisode(episodeUrl: episodeUrl) { retEpisode in
+//            self.odcinek = retEpisode
+//        }
+//    }
     //unc fetchzioal
-    func outputIsReadyForData() {
-        fetchData()
-        self.output?.reloadView()
+    
+    func drawData() {
+        self.output?.setLoading(isLoading: true)
+        
+        firstly {
+            dataManager.getPage(1, type: Character.self)
+        }.then { firstPage -> Promise<Page<Character>> in
+            self.dataManager.getPage(Int.random(in: 1...firstPage.info.pages), type: Character.self)
+        }.then { nextRandomPage -> Promise<Episode> in
+            let randomCharacterNo = Int.random(in: 1..<nextRandomPage.results.count)
+            let randomCharacter = nextRandomPage.results[randomCharacterNo]
+            self.ziomal = randomCharacter
+            
+            return self.dataManager.getEpisode(episodeUrl: self.ziomal!.episode[0])
+        }.ensure {
+            self.output?.setLoading(isLoading: false)
+        }.done { episode in
+            self.odcinek = episode
+        }.catch { error in
+            self.output?.showError(mesasge: error.localizedDescription)
+        }
     }
+        
+        
+        
+//
+//        fetchData()
+//        fetchEpisodeName(episodeUrl: self.ziomal?.episode[0] ?? "https://rickandmortyapi.com/api/episode/1")
+//    }
 }

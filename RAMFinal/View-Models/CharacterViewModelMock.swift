@@ -22,8 +22,9 @@ class CharacterViewModelMock: CharacterViewViewModelType {
     var episodeCounter: Int = 2
     
     var originLocationName = "jkdfhskjkgbf"
+    var firstEpisode = "fgsggdf"
     
-    func outputIsReadyForData() {
+    func drawData() {
         self.name = "Kuba"
         self.imageUrl = URL(string: "https://rickandmortyapi.com/api/character/avatar/312.jpeg")
         self.output?.reloadView()
