@@ -55,6 +55,8 @@ class CharacterView: UIView {
         self.characterLabel.font = self.characterLabel.font.withSize(40.0)
         self.characterLabel.font = UIFont.init(name: "data-latin", size: 25.0)
         self.characterLabel.numberOfLines = 0
+        self.characterLabel.layer.cornerRadius = 20.0
+        self.characterLabel.layer.masksToBounds = true
         
         self.addSubview(scrollView)
         self.scrollView.delegate = self
@@ -87,6 +89,8 @@ class CharacterView: UIView {
         self.characterImage.image = UIImage(named: "ogurek")
         self.characterImage.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
         self.characterImage.heightAnchor.constraint(equalTo: self.characterImage.widthAnchor).isActive = true
+        self.characterImage.layer.cornerRadius = 20.0
+        self.characterImage.layer.masksToBounds = true
 //      characterImage.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
 //      characterImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
 
@@ -99,6 +103,9 @@ class CharacterView: UIView {
         self.genderLabel.textAlignment = .center
         self.genderLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
         self.genderLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        self.genderLabel.layer.cornerRadius = 20.0
+        self.genderLabel.layer.masksToBounds = true
+        
         // labelka od gatunku
         self.stackView.addArrangedSubview(self.speciesLabel)
         self.speciesLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -106,8 +113,10 @@ class CharacterView: UIView {
         self.speciesLabel.backgroundColor = .basicBackground
         self.speciesLabel.textAlignment = .center
         self.speciesLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
-        self.speciesLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        self.speciesLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 40.0).isActive = true
         self.speciesLabel.numberOfLines = 0
+        self.speciesLabel.layer.cornerRadius = 20.0
+        self.speciesLabel.layer.masksToBounds = true
         
         //jhbdfjdfjdsfjhzbvdjsb vjhlbdhbzdfjhbdjzbdf
         
@@ -119,6 +128,8 @@ class CharacterView: UIView {
         self.episodesLabel.textAlignment = .center
         self.episodesLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
         self.episodesLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        self.episodesLabel.layer.cornerRadius = 20.0
+        self.episodesLabel.layer.masksToBounds = true
         
         //labelka od miejsca pochodzenia
         self.stackView.addArrangedSubview(self.originLabel)
@@ -129,6 +140,8 @@ class CharacterView: UIView {
         self.originLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
         self.originLabel.numberOfLines = 0
         self.originLabel.heightAnchor.constraint(greaterThanOrEqualTo: self.episodesLabel.heightAnchor).isActive = true
+        self.originLabel.layer.cornerRadius = 20.0
+        self.originLabel.layer.masksToBounds = true
        
         //labelka od tego czy ziomal jest zywy czy niezywy
         self.stackView.addArrangedSubview(self.statusLabel)
@@ -139,6 +152,8 @@ class CharacterView: UIView {
         self.statusLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
         self.statusLabel.numberOfLines = 0
         self.statusLabel.heightAnchor.constraint(greaterThanOrEqualTo: self.episodesLabel.heightAnchor).isActive = true
+        self.statusLabel.layer.cornerRadius = 20.0
+        self.statusLabel.layer.masksToBounds = true
         
         //Labelka od pierwszego pojawienia sie
         self.stackView.addArrangedSubview(self.firstEpisodeLabel)
@@ -149,6 +164,8 @@ class CharacterView: UIView {
         self.firstEpisodeLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.7).isActive = true
         self.firstEpisodeLabel.numberOfLines = 0
         self.firstEpisodeLabel.heightAnchor.constraint(greaterThanOrEqualTo: self.episodesLabel.heightAnchor).isActive = true
+        self.firstEpisodeLabel.layer.cornerRadius = 20.0
+        self.firstEpisodeLabel.layer.masksToBounds = true
         
         self.addSubview(buttonsStackView)
         self.buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -162,6 +179,7 @@ class CharacterView: UIView {
         self.buttonsStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
         self.buttonsStackView.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
         self.buttonsStackView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        
 
         
         //przycisk od losowania ziomali
