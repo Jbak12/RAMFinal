@@ -5,9 +5,14 @@
 //  Created by admin on 09/08/2021.
 //
 
+import UIKit
 import Foundation
 
-class CharacterViewModelMock: CharacterViewViewModelType {
+class CharacterViewModelMock: CharacterViewModelType {
+    func saveData(image: UIImage?) {
+        
+    }
+    
     var status: String = "cooo"
     var gender: String = "Male"
     

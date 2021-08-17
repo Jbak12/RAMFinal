@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 class CharactersTableView: UIView {
     
+    
+    
     var tableView: UITableView
     
     init(frame: CGRect, style: UITableView.Style) {
@@ -17,7 +19,6 @@ class CharactersTableView: UIView {
     
     func setup() {
         self.backgroundColor = .white
-        
         addSubview(self.tableView)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true

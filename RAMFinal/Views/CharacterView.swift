@@ -3,12 +3,17 @@ import UIKit
 
 class CharacterView: UIView {
     
+    var VCp : ViewBackend!
+    
     var onDrawButtonPress: (() -> Void)?
     var onSaveButtonPress: (() -> Void)?
+    //var saveToCoreData: (() -> Void)?
     
     lazy var scrollView = UIScrollView()
+    
     lazy var stackView = UIStackView()
     lazy var buttonsStackView = UIStackView()
+    
     
     var characterImage = UIImageView(){
         didSet{
@@ -26,7 +31,7 @@ class CharacterView: UIView {
     lazy var firstEpisodeLabel = UILabel()
     
     lazy var drawButton = UIButton()
-    private lazy var saveButton = UIButton()
+    lazy var saveButton = UIButton()
     
     
     override init(frame: CGRect) {
@@ -55,8 +60,6 @@ class CharacterView: UIView {
         self.characterLabel.font = self.characterLabel.font.withSize(40.0)
         self.characterLabel.font = UIFont.init(name: "data-latin", size: 25.0)
         self.characterLabel.numberOfLines = 0
-        self.characterLabel.layer.cornerRadius = 20.0
-        self.characterLabel.layer.masksToBounds = true
         
         self.addSubview(scrollView)
         self.scrollView.delegate = self
@@ -207,7 +210,7 @@ class CharacterView: UIView {
         self.saveButton.layer.cornerRadius = 10
         self.saveButton.setTitle("OFF", for: .disabled)
         //self.drawButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.saveButton.addTarget(self, action: #selector(wypisz), for: .touchUpInside)
+        self.saveButton.addTarget(self, action: #selector(saveToCD), for: .touchUpInside)
         //DOUBLE TAP
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(saveButtonPressed(_:)))
         tap2.numberOfTapsRequired = 2
@@ -222,6 +225,7 @@ class CharacterView: UIView {
 //        self.drawButton.isEnabled = false
         self.drawButton.backgroundColor = .gray
     }
+    
     @objc private func wypisz(){
         print("cokolwiek")
     }
@@ -229,7 +233,21 @@ class CharacterView: UIView {
     @objc private func saveButtonPressed(_ sender: Any) {
         self.onSaveButtonPress?()
     }
+    @objc private func saveToCD() {
+        self.VCp.initiateSave()
+    }
+    
+//    @objc private func saveToCoreData (_ sender: Any){
+//        if let myContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
+//            let CharacterToSave = CDCharacter(context: myContext)
+//            CharacterToSave.name = self.characterLabel.text
+//            CharacterToSave.gender = self.genderLabel.text
+//            CharacterToSave.species = self.speciesLabel.text
+//            CharacterToSave.episodesCount = self.episodesLabel.text
+//        }
+    
 }
+
 
 extension CharacterView: UIScrollViewDelegate {
     

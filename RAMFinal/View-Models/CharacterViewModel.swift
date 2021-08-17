@@ -2,7 +2,7 @@ import UIKit
 import Alamofire
 import PromiseKit
 
-class CharacterViewModel: CharacterViewViewModelType {   
+class CharacterViewModel: CharacterViewModelType {   
     weak var output: CharacterViewControllerType?
     
     private var odcinek: Episode? {
@@ -11,7 +11,7 @@ class CharacterViewModel: CharacterViewViewModelType {
         }
     }
     
-    private var ziomal : Character? {
+    private var randCharater : Character? {
         didSet {
             self.output?.reloadView()
         }
@@ -19,18 +19,18 @@ class CharacterViewModel: CharacterViewViewModelType {
     
     
     var name: String?{
-        return ziomal?.name
+        return randCharater?.name
     }
 
     var imageUrl: URL? {
-        if let urlString = ziomal?.image {
+        if let urlString = randCharater?.image {
             return URL(string: urlString)
         }
         return nil
     }
     
     var gender: String {
-        if let gender = ziomal?.gender{
+        if let gender = randCharater?.gender{
             return gender
         }else{
             return "no gender "
@@ -38,28 +38,28 @@ class CharacterViewModel: CharacterViewViewModelType {
         
     }
     var species: String {
-        if let species = ziomal?.species{
+        if let species = randCharater?.species{
             return species
         }else{
             return "no species"
         }
     }
     var episodeCounter: Int{
-        if let episodecount = ziomal?.episode.count{
+        if let episodecount = randCharater?.episode.count{
             return episodecount
         }else{
             return 1234
         }
     }
     var originLocationName: String{
-        if let originlocation = ziomal?.origin.name{
+        if let originlocation = randCharater?.origin.name{
             return originlocation
         }else{
             return "ebebebe"
         }
     }
     var status : String{
-        if let status = ziomal?.status{
+        if let status = randCharater?.status{
             return status.rawValue
         }else{
            return "dfgsgdffsdgd"
@@ -113,9 +113,9 @@ class CharacterViewModel: CharacterViewViewModelType {
         }.then { nextRandomPage -> Promise<Episode> in
             let randomCharacterNo = Int.random(in: 0..<nextRandomPage.results.count)
             let randomCharacter = nextRandomPage.results[randomCharacterNo]
-            self.ziomal = randomCharacter
+            self.randCharater = randomCharacter
             print(randomCharacterNo)
-            return self.dataManager.getEpisode(episodeUrl: self.ziomal!.episode[0])
+            return self.dataManager.getEpisode(episodeUrl: self.randCharater!.episode[0])
         }.ensure {
              self.output?.setLoading(isLoading: false)
         }.done { episode in
@@ -124,7 +124,27 @@ class CharacterViewModel: CharacterViewViewModelType {
              self.output?.showError(mesasge: error.localizedDescription)
         }
     }
+    
+    func saveData(image: UIImage?) {
+        if let myContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
+            let CharacterToSave = CDCharacter(context: myContext)
+            CharacterToSave.name = self.name
+            CharacterToSave.gender = self.gender
+            CharacterToSave.species = self.species
+            CharacterToSave.episodesCount = Int16(self.episodeCounter)
+            CharacterToSave.originLocation = self.originLocationName
+            CharacterToSave.status = self.status
+            CharacterToSave.firstEpisode = self.firstEpisode
+            if let data = image?.pngData() {
+                CharacterToSave.characterImage = data
+            }
+            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+            if let CDCharacters =  try? myContext.fetch(CDCharacter.fetchRequest()) as? [CDCharacter]{
+                print(CDCharacters.count)
+            }
+        }
         
+    }
         
         
 //

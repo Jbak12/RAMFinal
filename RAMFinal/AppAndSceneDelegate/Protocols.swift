@@ -12,8 +12,8 @@ protocol ApiModelProtocol {
 
 
 // MARK: - Character
-
-protocol CharacterViewViewModelType: AnyObject {
+//Users/admin/Desktop/RAMFinal/RAMFinal/ViewControllers/CharacterViewController.swift:            self?.viewModel.drawData()
+protocol CharacterViewModelType: AnyObject {
     var output: CharacterViewControllerType? { get set }
     
     var name: String? { get }
@@ -26,12 +26,17 @@ protocol CharacterViewViewModelType: AnyObject {
     var firstEpisode: String {get}
     
     func drawData()
+    func saveData(image: UIImage?)
 }
 
 protocol CharacterViewControllerType: AnyObject {
-    init(viewModel: CharacterViewViewModelType)
+    init(viewModel: CharacterViewModelType)
 
     func reloadView()
     func setLoading(isLoading: Bool)
     func showError(mesasge: String)
+}
+
+protocol ViewBackend {
+    func initiateSave()
 }

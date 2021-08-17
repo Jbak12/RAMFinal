@@ -13,10 +13,10 @@ import MBProgressHUD
 class CharacterViewController: UIViewController, CharacterViewControllerType {
     
     var myView : CharacterView!
-    var viewModel : CharacterViewViewModelType
+    var viewModel : CharacterViewModelType
     //var characters = []()
     
-    required init(viewModel: CharacterViewViewModelType) {
+    required init(viewModel: CharacterViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         
@@ -40,9 +40,11 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     
     func reloadView() {
         self.myView.characterLabel.text = self.viewModel.name
+        
+        self.myView.saveButton.isEnabled = false
         if let url = self.viewModel.imageUrl {
             self.myView.characterImage.af.setImage(withURL: url, placeholderImage: UIImage(named: "ogurek"), imageTransition: .crossDissolve(1.0)) { result in
-                self.myView.drawButton.isEnabled = true
+                self.myView.saveButton.isEnabled = true
                 self.myView.drawButton.backgroundColor = .buttonBackground
             }
         }
@@ -56,8 +58,14 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
        
         let desiredOffset = CGPoint(x: 0, y: -myView.scrollView.contentInset.top)
         self.myView.scrollView.setContentOffset(desiredOffset, animated: true)
+        
         //self.characters.append(self.viewModel.)
         //self.myView.button.isEnabled = true
+    }
+    func saveToCoreData() {
+        
+        self.viewModel.saveData(image: self.myView.characterImage.image)
+        
     }
     
     func setLoading(isLoading: Bool) {
@@ -80,6 +88,7 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     override func loadView() {
         let theView = CharacterView()
         myView = theView
+        theView.VCp = self
         self.view = theView
     }
     
@@ -95,3 +104,8 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     }
 }
 
+extension CharacterViewController: ViewBackend {
+    func initiateSave() {
+        self.saveToCoreData()
+    }
+}
