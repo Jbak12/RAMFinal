@@ -32,6 +32,7 @@ class CharacterView: UIView {
     
     lazy var drawButton = UIButton()
     lazy var saveButton = UIButton()
+    lazy var goToTV = UIButton(type: .custom)
     
     
     override init(frame: CGRect) {
@@ -48,18 +49,32 @@ class CharacterView: UIView {
         
         self.backgroundColor = UIColor(red: 0.31, green: 0.488, blue: 0.497, alpha: 1)
         
+        // Button od przechodzenia do tableview
+        self.addSubview(self.goToTV)
+        self.goToTV.translatesAutoresizingMaskIntoConstraints = false
+        self.goToTV.backgroundColor = .buttonBackground
+        //self.goToTV.leadingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.goToTV.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.goToTV.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.goToTV.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        self.goToTV.addTarget(self, action: #selector(goToTVButtonPressed(_:)), for: .touchUpInside)
+        self.goToTV.setBackgroundImage(UIImage(named: "list"), for: .normal)
+        self.goToTV.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.15).isActive = true
+        
         //labelka od imienia
         self.addSubview(self.characterLabel)
         self.characterLabel.translatesAutoresizingMaskIntoConstraints = false
         self.characterLabel.textAlignment = .center
         self.characterLabel.backgroundColor = .basicBackground
+        self.characterLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.characterLabel.trailingAnchor.constraint(equalTo: self.goToTV.leadingAnchor).isActive = true
         self.characterLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
-        self.characterLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.characterLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         self.characterLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
         self.characterLabel.font = self.characterLabel.font.withSize(40.0)
         self.characterLabel.font = UIFont.init(name: "data-latin", size: 25.0)
         self.characterLabel.numberOfLines = 0
+        
+        
         
         self.addSubview(scrollView)
         self.scrollView.delegate = self
@@ -215,9 +230,6 @@ class CharacterView: UIView {
         //self.drawButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.saveButton.addTarget(self, action: #selector(saveToCD), for: .touchUpInside)
         //DOUBLE TAP
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(saveButtonPressed(_:)))
-        tap2.numberOfTapsRequired = 2
-        self.saveButton.addGestureRecognizer(tap2)
         
         
     }
@@ -225,6 +237,8 @@ class CharacterView: UIView {
     func setButtonsHidden(_ areHidden: Bool) {
         self.buttonsStackViewHeight.constant = 0
         self.buttonsStackView.isHidden = areHidden
+        //self.goToTV.widthAnchor.constraint(equalToConstant: 0).isActive = true
+        self.characterLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
     }
     
     @objc private func drawButtonPressed(_ sender: Any) {
@@ -239,7 +253,7 @@ class CharacterView: UIView {
         print("cokolwiek")
     }
     
-    @objc private func saveButtonPressed(_ sender: Any) {
+    @objc private func goToTVButtonPressed(_ sender: Any) {
         self.onSaveButtonPress?()
     }
     @objc private func saveToCD() {

@@ -55,7 +55,12 @@ extension CharactersTableViewController: UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "kReuseIdentifier", for: indexPath)
         
         cell.textLabel?.text = self.viewModel.characters[indexPath.row].name
-        
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = .basicBackground
+        }else{
+            cell.backgroundColor = UIColor(red: 0.31, green: 0.488, blue: 0.497, alpha: 1)
+        }
+       
         return cell
     }
     
