@@ -2,7 +2,9 @@ import UIKit
 import Alamofire
 import PromiseKit
 
-class CharacterViewModel: CharacterViewModelType {   
+class CharacterViewModel: CharacterViewModelType {
+    
+  
     weak var output: CharacterViewControllerType?
     
     private var odcinek: Episode? {
@@ -16,7 +18,6 @@ class CharacterViewModel: CharacterViewModelType {
             self.output?.reloadView()
         }
     }
-    
     
     var name: String?{
         return randCharater?.name
@@ -70,19 +71,23 @@ class CharacterViewModel: CharacterViewModelType {
         if let numerOdcinka = odcinek?.episode{
             return numerOdcinka
         }else{
-            return "jezu nie wiem co rovic"
+            return "whatever"
         }
     }
     var firstEpisodeName: String{
         if let odcinkaimie = odcinek?.name{
             return odcinkaimie
         }else{
-            return"AAAAAAAA"
+            return" "
         }
     }
     
     
     var dataManager = DataManager()
+    
+    var tableViewModel: CharactersTableViewModelType {
+        return CharactersTableViewModel()
+    }
     
 //    private func fetchData() {
 //        dataManager.getPage(1, type: Character.self){ page in
@@ -108,13 +113,13 @@ class CharacterViewModel: CharacterViewModelType {
             dataManager.getPage(1, type: Character.self)
         }.then { firstPage -> Promise<Page<Character>> in
             let randomPageNumber = Int.random(in: 1...firstPage.info.pages)
-            print(randomPageNumber)
+            //print(randomPageNumber)
             return self.dataManager.getPage(randomPageNumber, type: Character.self)
         }.then { nextRandomPage -> Promise<Episode> in
             let randomCharacterNo = Int.random(in: 0..<nextRandomPage.results.count)
             let randomCharacter = nextRandomPage.results[randomCharacterNo]
             self.randCharater = randomCharacter
-            print(randomCharacterNo)
+            //print(randomCharacterNo)
             return self.dataManager.getEpisode(episodeUrl: self.randCharater!.episode[0])
         }.ensure {
              self.output?.setLoading(isLoading: false)
@@ -126,24 +131,23 @@ class CharacterViewModel: CharacterViewModelType {
     }
     
     func saveData(image: UIImage?) {
-        if let myContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
-            let CharacterToSave = CDCharacter(context: myContext)
-            CharacterToSave.name = self.name
-            CharacterToSave.gender = self.gender
-            CharacterToSave.species = self.species
-            CharacterToSave.episodesCount = Int16(self.episodeCounter)
-            CharacterToSave.originLocation = self.originLocationName
-            CharacterToSave.status = self.status
-            CharacterToSave.firstEpisode = self.firstEpisode
-            if let data = image?.pngData() {
-                CharacterToSave.characterImage = data
-            }
-            (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-            if let CDCharacters =  try? myContext.fetch(CDCharacter.fetchRequest()) as? [CDCharacter]{
-                print(CDCharacters.count)
-            }
+        guard let character = self.randCharater else { return }
+        
+        let characterToSave = CDCharacter(context: AppDelegate.persistentContainer.viewContext)
+        characterToSave.id = Int16(character.id)
+        characterToSave.name = self.name
+        characterToSave.gender = self.gender
+        characterToSave.species = self.species
+        characterToSave.episodesCount = Int16(self.episodeCounter)
+        characterToSave.originLocation = self.originLocationName
+        characterToSave.status = self.status
+        characterToSave.firstEpisode = self.firstEpisode
+        
+        if let data = image?.pngData() {
+            characterToSave.characterImage = data
         }
         
+        AppDelegate.shared.saveContext()
     }
         
         

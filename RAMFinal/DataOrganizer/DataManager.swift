@@ -7,7 +7,7 @@ class DataManager{
         return Promise<Page<T>>() { seal in
             let url = type.urlString + "?page=\(pageNumber)"
             
-            print("Request start: " + url)
+            //print("Request start: " + url)
             AF.request(url).response(queue: .main) { response in
                 switch response.result {
                 case .failure(let error):

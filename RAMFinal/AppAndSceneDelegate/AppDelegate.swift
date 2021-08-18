@@ -11,6 +11,14 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    static var shared: AppDelegate {
+        (UIApplication.shared.delegate as! AppDelegate)
+    }
+    
+    static var persistentContainer: NSPersistentContainer {
+        shared.persistentContainer
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true

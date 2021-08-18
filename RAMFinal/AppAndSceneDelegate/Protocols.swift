@@ -15,7 +15,6 @@ protocol ApiModelProtocol {
 //Users/admin/Desktop/RAMFinal/RAMFinal/ViewControllers/CharacterViewController.swift:            self?.viewModel.drawData()
 protocol CharacterViewModelType: AnyObject {
     var output: CharacterViewControllerType? { get set }
-    
     var name: String? { get }
     var imageUrl: URL? { get }
     var gender: String { get }
@@ -24,9 +23,29 @@ protocol CharacterViewModelType: AnyObject {
     var originLocationName: String {get}
     var status: String {get}
     var firstEpisode: String {get}
+    var tableViewModel: CharactersTableViewModelType {get}
     
     func drawData()
     func saveData(image: UIImage?)
+}
+
+protocol CharacterPreviewViewModelType: AnyObject {
+    init(characterId: Int16)
+    var name: String? { get }
+    var image: UIImage? { get }
+    var gender: String { get }
+    var species: String { get }
+    var episodeCounter: Int {get}
+    var originLocationName: String {get}
+    var status: String {get}
+    var firstEpisode: String {get}
+}
+
+protocol CharactersTableViewModelType: AnyObject {
+    var tableOutput: CharactersTableViewController? {get set}
+    var characters: [CDCharacter] {get set}
+
+    func drawData()
 }
 
 protocol CharacterViewControllerType: AnyObject {
@@ -34,6 +53,14 @@ protocol CharacterViewControllerType: AnyObject {
 
     func reloadView()
     func setLoading(isLoading: Bool)
+    func showError(mesasge: String)
+}
+
+protocol CharactersTableViewControllerType: AnyObject {
+    var viewModel: CharactersTableViewModelType { get }
+    init(viewModel: CharactersTableViewModelType)
+
+    func reloadView()
     func showError(mesasge: String)
 }
 

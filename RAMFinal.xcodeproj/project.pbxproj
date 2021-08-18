@@ -26,8 +26,8 @@
 		848FAB2526C29FF1002B8D62 /* CharactersTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FAB2426C29FF1002B8D62 /* CharactersTableView.swift */; };
 		84A0BECF26C12D4D0095DA21 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BECE26C12D4D0095DA21 /* CharacterViewModel.swift */; };
 		84A0BED126C12DD20095DA21 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BED026C12DD20095DA21 /* DataManager.swift */; };
-		84A0BED326C14F8A0095DA21 /* CharacterViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BED226C14F8A0095DA21 /* CharacterViewModelMock.swift */; };
-		84A1877726CA7863001C5024 /* TableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1877626CA7863001C5024 /* TableViewModel.swift */; };
+		84A1877726CA7863001C5024 /* CharactersTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1877626CA7863001C5024 /* CharactersTableViewModel.swift */; };
+		84A70F0026CD2773004DE32A /* CharacterPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A70EFF26CD2773004DE32A /* CharacterPreviewController.swift */; };
 		84C0C66C26C6B76300C4F371 /* ArrayCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0C66B26C6B76300C4F371 /* ArrayCharacter.swift */; };
 		C4CCFFF87719862181537C1D /* Pods_RAMFinal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5EE260A77AC7A630B5BFB92 /* Pods_RAMFinal.framework */; };
 /* End PBXBuildFile section */
@@ -54,8 +54,8 @@
 		848FAB2426C29FF1002B8D62 /* CharactersTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableView.swift; sourceTree = "<group>"; };
 		84A0BECE26C12D4D0095DA21 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		84A0BED026C12DD20095DA21 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		84A0BED226C14F8A0095DA21 /* CharacterViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModelMock.swift; sourceTree = "<group>"; };
-		84A1877626CA7863001C5024 /* TableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModel.swift; sourceTree = "<group>"; };
+		84A1877626CA7863001C5024 /* CharactersTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewModel.swift; sourceTree = "<group>"; };
+		84A70EFF26CD2773004DE32A /* CharacterPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterPreviewController.swift; sourceTree = "<group>"; };
 		84C0C66B26C6B76300C4F371 /* ArrayCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayCharacter.swift; sourceTree = "<group>"; };
 		879A8D236915DD3935AF38AC /* Pods-RAMFinal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RAMFinal.release.xcconfig"; path = "Target Support Files/Pods-RAMFinal/Pods-RAMFinal.release.xcconfig"; sourceTree = "<group>"; };
 		AE19ED7CD046B4F1F19D0150 /* Pods-RAMFinal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RAMFinal.debug.xcconfig"; path = "Target Support Files/Pods-RAMFinal/Pods-RAMFinal.debug.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +135,7 @@
 			children = (
 				8468CE5C26BD456C001F73FA /* CharacterViewController.swift */,
 				848FAB2226C29F73002B8D62 /* CharactersTableViewController.swift */,
+				84A70EFF26CD2773004DE32A /* CharacterPreviewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -143,8 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				84A0BECE26C12D4D0095DA21 /* CharacterViewModel.swift */,
-				84A0BED226C14F8A0095DA21 /* CharacterViewModelMock.swift */,
-				84A1877626CA7863001C5024 /* TableViewModel.swift */,
+				84A1877626CA7863001C5024 /* CharactersTableViewModel.swift */,
 			);
 			path = "View-Models";
 			sourceTree = "<group>";
@@ -322,11 +322,11 @@
 				8468CE8126BD4A3F001F73FA /* Extensions.swift in Sources */,
 				8468CE7726BD48F8001F73FA /* Character.swift in Sources */,
 				8468CE7F26BD494A001F73FA /* Protocols.swift in Sources */,
-				84A0BED326C14F8A0095DA21 /* CharacterViewModelMock.swift in Sources */,
 				8468CE6326BD456C001F73FA /* RAMFinal.xcdatamodeld in Sources */,
 				84C0C66C26C6B76300C4F371 /* ArrayCharacter.swift in Sources */,
-				84A1877726CA7863001C5024 /* TableViewModel.swift in Sources */,
+				84A1877726CA7863001C5024 /* CharactersTableViewModel.swift in Sources */,
 				8468CE7526BD48EC001F73FA /* Page.swift in Sources */,
+				84A70F0026CD2773004DE32A /* CharacterPreviewController.swift in Sources */,
 				84A0BED126C12DD20095DA21 /* DataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

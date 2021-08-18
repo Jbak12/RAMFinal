@@ -1,9 +1,6 @@
 import Foundation
 import UIKit
 class CharactersTableView: UIView {
-    
-    
-    
     var tableView: UITableView
     
     init(frame: CGRect, style: UITableView.Style) {

@@ -13,13 +13,11 @@ import MBProgressHUD
 class CharacterViewController: UIViewController, CharacterViewControllerType {
     
     var myView : CharacterView!
-    var viewModel : CharacterViewModelType
-    //var characters = []()
+    var viewModel : CharacterViewModelType!
     
     required init(viewModel: CharacterViewModelType) {
-        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
+        self.viewModel = viewModel
         self.viewModel.output = self
     }
     
@@ -29,12 +27,14 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     
     func bindViewWithController() {
         self.myView.onDrawButtonPress = { [weak self] in
-            self?.viewModel.drawData()
+            guard let self = self else { return }
+            self.viewModel.drawData()
         }
         
         self.myView.onSaveButtonPress = { [weak self] in
-            let vc = CharactersTableViewController()
-            self?.navigationController?.pushViewController(vc, animated: true)
+            guard let self = self else { return }
+            let vc = CharactersTableViewController(viewModel: self.viewModel.tableViewModel)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     

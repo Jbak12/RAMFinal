@@ -19,19 +19,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let WindowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: WindowScene.coordinateSpace.bounds)
         window?.windowScene = WindowScene
+        
+     
+        
+        let tableViewModel = CharactersTableViewModel()
         let viewModel = CharacterViewModel()
+        let tabVC = CharactersTableViewController(viewModel: tableViewModel)
+        
         let vc = CharacterViewController(viewModel: viewModel)
         vc.title = "VC"
-        
-        let tableview = CharactersTableViewController()
-        
-        let viewModel2 = CharacterViewModelMock()
-        let vc2 = CharacterViewController(viewModel: viewModel2)
-        vc2.title = "VC2"
+
         let navigationViewController = UINavigationController(rootViewController: vc)
 
         let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([navigationViewController, vc2, tableview], animated: false)
+        tabBarController.setViewControllers([navigationViewController, tabVC], animated: false)
         tabBarController.tabBar.isTranslucent = false
         
         window?.rootViewController = navigationViewController

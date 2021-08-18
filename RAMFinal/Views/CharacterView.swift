@@ -13,7 +13,7 @@ class CharacterView: UIView {
     
     lazy var stackView = UIStackView()
     lazy var buttonsStackView = UIStackView()
-    
+    var buttonsStackViewHeight: NSLayoutConstraint!
     
     var characterImage = UIImageView(){
         didSet{
@@ -180,7 +180,11 @@ class CharacterView: UIView {
         self.buttonsStackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor).isActive = true
         self.buttonsStackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor).isActive = true
         self.buttonsStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        self.buttonsStackView.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
+        
+        self.buttonsStackViewHeight = self.buttonsStackView.heightAnchor.constraint(equalToConstant: 50.0)
+        self.buttonsStackViewHeight.isActive = true
+        
+        
         self.buttonsStackView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         
 
@@ -193,7 +197,7 @@ class CharacterView: UIView {
         self.drawButton.backgroundColor = .buttonBackground
         self.drawButton.layer.cornerRadius = 10
         self.drawButton.setTitle("OFF", for: .disabled)
-        
+    
 
         
 //        let tap1 = UITapGestureRecognizer(target: self, action: #selector(saveButtonPressed(_:)))
@@ -208,7 +212,6 @@ class CharacterView: UIView {
         //self.AddToCollectionButton.addTarget(self, action: #selector(drawButtonPressed(_:)), for: .touchUpInside)
         self.saveButton.backgroundColor = .buttonBackground
         self.saveButton.layer.cornerRadius = 10
-        self.saveButton.setTitle("OFF", for: .disabled)
         //self.drawButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.saveButton.addTarget(self, action: #selector(saveToCD), for: .touchUpInside)
         //DOUBLE TAP
@@ -219,11 +222,17 @@ class CharacterView: UIView {
         
     }
     
+    func setButtonsHidden(_ areHidden: Bool) {
+        self.buttonsStackViewHeight.constant = 0
+        self.buttonsStackView.isHidden = areHidden
+    }
+    
     @objc private func drawButtonPressed(_ sender: Any) {
-        //self.drawButton.isEnabled = false
+        self.saveButton.isEnabled = true
         self.onDrawButtonPress?()
 //        self.drawButton.isEnabled = false
         self.drawButton.backgroundColor = .gray
+        self.saveButton.backgroundColor = .buttonBackground
     }
     
     @objc private func wypisz(){
@@ -234,6 +243,8 @@ class CharacterView: UIView {
         self.onSaveButtonPress?()
     }
     @objc private func saveToCD() {
+        self.saveButton.isEnabled = false
+        self.saveButton.backgroundColor = .gray
         self.VCp.initiateSave()
     }
     
