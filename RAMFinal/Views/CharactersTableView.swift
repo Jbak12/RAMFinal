@@ -15,12 +15,13 @@ class CharactersTableView: UIView {
     }
     
     func setup() {
-        self.backgroundColor = .white
+        self.backgroundColor = .gray
         addSubview(self.tableView)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
         self.tableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        self.tableView.backgroundColor = .gray
     }
 }

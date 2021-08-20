@@ -5,12 +5,7 @@ import UIKit
 class CharactersTableViewModel: CharactersTableViewModelType {
     
     var tableOutput: CharactersTableViewController?
-    var characters: [CDCharacter] = [] {
-        didSet {
-            self.tableOutput?.reloadView()
-        }
-    }
-    
+    var characters: [CDCharacter] = [] 
     func drawData() {
         do {
             if let characters = try AppDelegate.shared.persistentContainer.viewContext.fetch(CDCharacter.fetchRequest()) as? [CDCharacter] {

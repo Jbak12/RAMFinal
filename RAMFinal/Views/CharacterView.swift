@@ -7,7 +7,6 @@ class CharacterView: UIView {
     
     var onDrawButtonPress: (() -> Void)?
     var onSaveButtonPress: (() -> Void)?
-    //var saveToCoreData: (() -> Void)?
     
     lazy var scrollView = UIScrollView()
     
@@ -15,12 +14,7 @@ class CharacterView: UIView {
     lazy var buttonsStackView = UIStackView()
     var buttonsStackViewHeight: NSLayoutConstraint!
     
-    var characterImage = UIImageView(){
-        didSet{
-            print("TEKST TESTOEY BALALALAKAK")
-            self.drawButton.isEnabled = true
-        }
-    }
+    var characterImage = UIImageView()
     
     lazy var characterLabel = UILabel()
     lazy var genderLabel = UILabel()
@@ -53,7 +47,6 @@ class CharacterView: UIView {
         self.addSubview(self.goToTV)
         self.goToTV.translatesAutoresizingMaskIntoConstraints = false
         self.goToTV.backgroundColor = .buttonBackground
-        //self.goToTV.leadingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.goToTV.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.goToTV.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
         self.goToTV.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -82,7 +75,6 @@ class CharacterView: UIView {
         self.scrollView.topAnchor.constraint(equalTo: self.characterLabel.bottomAnchor).isActive = true
         self.scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
         self.scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
-//        self.scrollView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: - ).isActive = true
         
         self.scrollView.addSubview(stackView)
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,9 +88,6 @@ class CharacterView: UIView {
         self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -30.0).isActive = true
         self.stackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor).isActive = true
         
-//      characterLabel.topAnchor.constraint(equalTo: characterImage.bottomAnchor, constant: 30.0).isActive = true
-
-        
         //obrazek
         self.stackView.addArrangedSubview(self.characterImage)
         self.characterImage.translatesAutoresizingMaskIntoConstraints = false
@@ -109,9 +98,6 @@ class CharacterView: UIView {
         self.characterImage.heightAnchor.constraint(equalTo: self.characterImage.widthAnchor).isActive = true
         self.characterImage.layer.cornerRadius = 20.0
         self.characterImage.layer.masksToBounds = true
-//      characterImage.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-//      characterImage.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-
 
         //labelka od plci
         self.stackView.addArrangedSubview(self.genderLabel)
@@ -135,8 +121,6 @@ class CharacterView: UIView {
         self.speciesLabel.numberOfLines = 0
         self.speciesLabel.layer.cornerRadius = 20.0
         self.speciesLabel.layer.masksToBounds = true
-        
-        //jhbdfjdfjdsfjhzbvdjsb vjhlbdhbzdfjhbdjzbdf
         
         //labelka od ilosci odcinkow
         self.stackView.addArrangedSubview(self.episodesLabel)
@@ -195,11 +179,8 @@ class CharacterView: UIView {
         self.buttonsStackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor).isActive = true
         self.buttonsStackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor).isActive = true
         self.buttonsStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
         self.buttonsStackViewHeight = self.buttonsStackView.heightAnchor.constraint(equalToConstant: 50.0)
         self.buttonsStackViewHeight.isActive = true
-        
-        
         self.buttonsStackView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         
 
@@ -212,24 +193,15 @@ class CharacterView: UIView {
         self.drawButton.backgroundColor = .buttonBackground
         self.drawButton.layer.cornerRadius = 10
         self.drawButton.setTitle("OFF", for: .disabled)
-    
-
-        
-//        let tap1 = UITapGestureRecognizer(target: self, action: #selector(saveButtonPressed(_:)))
-//        tap1.numberOfTapsRequired = 2
-//        self.saveButton.addGestureRecognizer(tap1)
-        
         
         //przycisk od zapisywania ziomali
         self.buttonsStackView.addArrangedSubview(saveButton)
         self.saveButton.translatesAutoresizingMaskIntoConstraints = false
         self.saveButton.setTitle("SAVE", for: .normal)
-        //self.AddToCollectionButton.addTarget(self, action: #selector(drawButtonPressed(_:)), for: .touchUpInside)
+        self.saveButton.setTitle("ALREADY IN CD", for: .disabled)
         self.saveButton.backgroundColor = .buttonBackground
         self.saveButton.layer.cornerRadius = 10
-        //self.drawButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.saveButton.addTarget(self, action: #selector(saveToCD), for: .touchUpInside)
-        //DOUBLE TAP
         
         
     }
@@ -237,16 +209,11 @@ class CharacterView: UIView {
     func setButtonsHidden(_ areHidden: Bool) {
         self.buttonsStackViewHeight.constant = 0
         self.buttonsStackView.isHidden = areHidden
-        //self.goToTV.widthAnchor.constraint(equalToConstant: 0).isActive = true
         self.characterLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
     }
     
     @objc private func drawButtonPressed(_ sender: Any) {
-        self.saveButton.isEnabled = true
         self.onDrawButtonPress?()
-//        self.drawButton.isEnabled = false
-        self.drawButton.backgroundColor = .gray
-        self.saveButton.backgroundColor = .buttonBackground
     }
     
     @objc private func wypisz(){
@@ -257,19 +224,12 @@ class CharacterView: UIView {
         self.onSaveButtonPress?()
     }
     @objc private func saveToCD() {
+        print("COKOLWIEK")
         self.saveButton.isEnabled = false
         self.saveButton.backgroundColor = .gray
         self.VCp.initiateSave()
     }
     
-//    @objc private func saveToCoreData (_ sender: Any){
-//        if let myContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
-//            let CharacterToSave = CDCharacter(context: myContext)
-//            CharacterToSave.name = self.characterLabel.text
-//            CharacterToSave.gender = self.genderLabel.text
-//            CharacterToSave.species = self.speciesLabel.text
-//            CharacterToSave.episodesCount = self.episodesLabel.text
-//        }
     
 }
 

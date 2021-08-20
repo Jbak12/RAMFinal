@@ -66,10 +66,9 @@ extension CharactersTableViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let characterToPreview = self.viewModel.characters[indexPath.row]
-//      let previewViewModel = CharacterPreviewViewModel()
-//      let vc = CharacterPreviewController(viewModel: previewViewModel)
-        
-        let vc = CharacterPreviewController()
+        let previewModel : CharacterPreviewModelType
+        previewModel = CharacterPreviewModel(characterId: characterToPreview.id)
+        let vc = CharacterPreviewController(viewModel: previewModel)
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

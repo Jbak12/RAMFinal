@@ -30,6 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         vc.title = "VC"
 
         let navigationViewController = UINavigationController(rootViewController: vc)
+        navigationViewController.navigationBar.barTintColor = .basicBackground
 
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([navigationViewController, tabVC], animated: false)

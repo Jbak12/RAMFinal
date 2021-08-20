@@ -37,14 +37,13 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
     func reloadView() {
         self.myView.characterLabel.text = self.viewModel.name
         
-        self.myView.saveButton.isEnabled = false
+        //self.myView.saveButton.isEnabled = false
         if let url = self.viewModel.imageUrl {
             self.myView.characterImage.af.setImage(withURL: url, placeholderImage: UIImage(named: "ogurek"), imageTransition: .crossDissolve(1.0)) { result in
-                self.myView.saveButton.isEnabled = true
+                //self.myView.saveButton.isEnabled = true
                 self.myView.drawButton.backgroundColor = .buttonBackground
             }
         }
@@ -62,6 +61,7 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         //self.characters.append(self.viewModel.)
         //self.myView.button.isEnabled = true
     }
+    
     func saveToCoreData() {
         
         self.viewModel.saveData(image: self.myView.characterImage.image)
@@ -69,7 +69,7 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     }
     
     func setLoading(isLoading: Bool) {
-        self.myView.drawButton.isEnabled = !isLoading
+        //self.myView.drawButton.isEnabled = !isLoading
         
         if isLoading {
             MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -102,9 +102,19 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
+    
+    func disableSaveButton() {
+        self.myView.saveButton.isEnabled = false
+        self.myView.saveButton.backgroundColor = .gray
+    }
+    func enableSaveButton() {
+        self.myView.saveButton.isEnabled = true
+        self.myView.saveButton.backgroundColor = .buttonBackground
+    }
 }
 
 extension CharacterViewController: ViewBackend {
+    
     func initiateSave() {
         self.saveToCoreData()
     }

@@ -24,12 +24,13 @@ protocol CharacterViewModelType: AnyObject {
     var status: String {get}
     var firstEpisode: String {get}
     var tableViewModel: CharactersTableViewModelType {get}
-    
     func drawData()
     func saveData(image: UIImage?)
+    func check() -> Bool
 }
 
-protocol CharacterPreviewViewModelType: AnyObject {
+protocol CharacterPreviewModelType: AnyObject {
+    var output: CharacterPreviewController! {get set}
     init(characterId: Int16)
     var name: String? { get }
     var image: UIImage? { get }
@@ -39,6 +40,7 @@ protocol CharacterPreviewViewModelType: AnyObject {
     var originLocationName: String {get}
     var status: String {get}
     var firstEpisode: String {get}
+    
 }
 
 protocol CharactersTableViewModelType: AnyObject {
@@ -54,6 +56,8 @@ protocol CharacterViewControllerType: AnyObject {
     func reloadView()
     func setLoading(isLoading: Bool)
     func showError(mesasge: String)
+    func disableSaveButton()
+    func enableSaveButton()
 }
 
 protocol CharactersTableViewControllerType: AnyObject {

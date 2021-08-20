@@ -4,11 +4,16 @@ import PromiseKit
 
 class CharacterViewModel: CharacterViewModelType {
     
-  
+    
     weak var output: CharacterViewControllerType?
     
     private var odcinek: Episode? {
         didSet{
+            if self.check() {
+                self.output?.disableSaveButton()
+            }else{
+                self.output?.enableSaveButton()
+            }
             self.output?.reloadView()
         }
     }
@@ -29,9 +34,16 @@ class CharacterViewModel: CharacterViewModelType {
         }
         return nil
     }
+    var id: Int {
+        if let id = randCharater?.id {
+            return id
+        }else{
+            return 123
+        }
+    }
     
     var gender: String {
-        if let gender = randCharater?.gender{
+        if let gender = randCharater?.gender {
             return gender
         }else{
             return "no gender "
@@ -49,7 +61,7 @@ class CharacterViewModel: CharacterViewModelType {
         if let episodecount = randCharater?.episode.count{
             return episodecount
         }else{
-            return 1234
+            return 123
         }
     }
     var originLocationName: String{
@@ -89,23 +101,6 @@ class CharacterViewModel: CharacterViewModelType {
         return CharactersTableViewModel()
     }
     
-//    private func fetchData() {
-//        dataManager.getPage(1, type: Character.self){ page in
-//            let randomPageNo = Int.random(in: 1...page.info.pages)
-//            self.dataManager.getPage(randomPageNo, type: Character.self) { randomPage in
-//                let randomCharacterNo = Int.random(in: 1..<randomPage.results.count)
-//                let randomCharacter = randomPage.results[randomCharacterNo]
-//                self.ziomal = randomCharacter
-//            }
-//        }
-//    }
-//    private func fetchEpisodeName(episodeUrl: String) {
-//        dataManager.getEpisode(episodeUrl: episodeUrl) { retEpisode in
-//            self.odcinek = retEpisode
-//        }
-//    }
-    //unc fetchzioal
-    
     func drawData() {
         self.output?.setLoading(isLoading: true)
         
@@ -113,13 +108,11 @@ class CharacterViewModel: CharacterViewModelType {
             dataManager.getPage(1, type: Character.self)
         }.then { firstPage -> Promise<Page<Character>> in
             let randomPageNumber = Int.random(in: 1...firstPage.info.pages)
-            //print(randomPageNumber)
             return self.dataManager.getPage(randomPageNumber, type: Character.self)
         }.then { nextRandomPage -> Promise<Episode> in
             let randomCharacterNo = Int.random(in: 0..<nextRandomPage.results.count)
             let randomCharacter = nextRandomPage.results[randomCharacterNo]
             self.randCharater = randomCharacter
-            //print(randomCharacterNo)
             return self.dataManager.getEpisode(episodeUrl: self.randCharater!.episode[0])
         }.ensure {
              self.output?.setLoading(isLoading: false)
@@ -127,6 +120,25 @@ class CharacterViewModel: CharacterViewModelType {
             return self.odcinek = episode
         }.catch { error in
              self.output?.showError(mesasge: error.localizedDescription)
+        }
+    }
+    
+    func check() -> Bool {
+        do {
+            let characters = try AppDelegate.shared.persistentContainer.viewContext.fetch(CDCharacter.fetchRequest()) as? [CDCharacter]
+            guard let charactersUnwrapped = characters else { return false }
+            let tab = charactersUnwrapped.filter{ $0.id == self.id }
+            if tab.count >= 1 && charactersUnwrapped.count != 0 {
+                print(tab.count)
+                print(charactersUnwrapped.count)
+                print("cokolwiek")
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            self.output?.showError(mesasge: error.localizedDescription)
+            return false
         }
     }
     
@@ -149,10 +161,4 @@ class CharacterViewModel: CharacterViewModelType {
         
         AppDelegate.shared.saveContext()
     }
-        
-        
-//
-//        fetchData()
-//        fetchEpisodeName(episodeUrl: self.ziomal?.episode[0] ?? "https://rickandmortyapi.com/api/episode/1")
-//    }
 }

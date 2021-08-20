@@ -7,6 +7,7 @@ extension UIColor{
     static var buttonBackground = UIColor(red: 0.31, green: 0.8, blue: 0.497, alpha: 0.7)
 }
 extension UILabel{
+    
     func changeFormat(){
         self.text = self.text?.uppercased()
     }
