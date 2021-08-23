@@ -70,4 +70,5 @@ protocol CharactersTableViewControllerType: AnyObject {
 
 protocol ViewBackend {
     func initiateSave()
+    func goToCV()
 }

@@ -20,7 +20,6 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         self.viewModel = viewModel
         self.viewModel.output = self
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -111,11 +110,18 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         self.myView.saveButton.isEnabled = true
         self.myView.saveButton.backgroundColor = .buttonBackground
     }
+    func goToCollection() {
+        let CVC = CollectionViewController()
+        self.navigationController?.pushViewController(CVC, animated: true)
+    }
 }
 
 extension CharacterViewController: ViewBackend {
     
     func initiateSave() {
         self.saveToCoreData()
+    }
+    func goToCV() {
+        self.goToCollection()
     }
 }
