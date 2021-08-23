@@ -7,6 +7,8 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "CollectionView"
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         let layout  = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         
