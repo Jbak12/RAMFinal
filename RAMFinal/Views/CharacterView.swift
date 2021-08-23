@@ -12,7 +12,9 @@ class CharacterView: UIView {
     
     lazy var stackView = UIStackView()
     lazy var buttonsStackView = UIStackView()
+    
     var buttonsStackViewHeight: NSLayoutConstraint!
+    var goToTVWidth: NSLayoutConstraint!
     
     var characterImage = UIImageView()
     
@@ -27,6 +29,8 @@ class CharacterView: UIView {
     lazy var drawButton = UIButton()
     lazy var saveButton = UIButton()
     lazy var goToTV = UIButton(type: .custom)
+    lazy var goToCV = UIButton(type: .custom)
+    
     
     
     override init(frame: CGRect) {
@@ -51,15 +55,28 @@ class CharacterView: UIView {
         self.goToTV.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
         self.goToTV.heightAnchor.constraint(equalToConstant: 60).isActive = true
         self.goToTV.addTarget(self, action: #selector(goToTVButtonPressed(_:)), for: .touchUpInside)
-        self.goToTV.setBackgroundImage(UIImage(named: "list"), for: .normal)
-        self.goToTV.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.15).isActive = true
+        self.goToTV.setBackgroundImage(UIImage(systemName: "list.dash"), for: .normal)
+        self.goToTVWidth = self.goToTV.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.15)
+        self.goToTVWidth.isActive = true
+
+        
+        //Button od przechodzenia do collectionView
+        self.addSubview(self.goToCV)
+        self.goToCV.translatesAutoresizingMaskIntoConstraints = false
+        self.goToCV.backgroundColor = .buttonBackground
+        self.goToCV.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.goToCV.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.goToCV.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
+        self.goToCV.setBackgroundImage(UIImage(systemName: "squareshape.split.2x2"), for: .normal)
+        self.goToCV.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.15).isActive = true
+        
         
         //labelka od imienia
         self.addSubview(self.characterLabel)
         self.characterLabel.translatesAutoresizingMaskIntoConstraints = false
         self.characterLabel.textAlignment = .center
         self.characterLabel.backgroundColor = .basicBackground
-        self.characterLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.characterLabel.leadingAnchor.constraint(equalTo: self.goToCV.trailingAnchor).isActive = true
         self.characterLabel.trailingAnchor.constraint(equalTo: self.goToTV.leadingAnchor).isActive = true
         self.characterLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
         self.characterLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -209,7 +226,13 @@ class CharacterView: UIView {
     func setButtonsHidden(_ areHidden: Bool) {
         self.buttonsStackViewHeight.constant = 0
         self.buttonsStackView.isHidden = areHidden
+        self.goToCV.widthAnchor.constraint(equalToConstant: 0).isActive = true
+        self.goToCV.isHidden = areHidden
+        self.goToTVWidth.constant = 0
+        self.goToTV.isHidden = areHidden
         self.characterLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        self.characterLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        
     }
     
     @objc private func drawButtonPressed(_ sender: Any) {

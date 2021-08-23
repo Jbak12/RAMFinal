@@ -24,6 +24,8 @@
 		8468CE8426BD4DBB001F73FA /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468CE8326BD4DBB001F73FA /* CharacterView.swift */; };
 		848FAB2326C29F73002B8D62 /* CharactersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FAB2226C29F73002B8D62 /* CharactersTableViewController.swift */; };
 		848FAB2526C29FF1002B8D62 /* CharactersTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848FAB2426C29FF1002B8D62 /* CharactersTableView.swift */; };
+		8497327E26D3862000DA98E7 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8497327D26D3862000DA98E7 /* CollectionViewController.swift */; };
+		8497328026D3863800DA98E7 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8497327F26D3863800DA98E7 /* CollectionView.swift */; };
 		84A0BECF26C12D4D0095DA21 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BECE26C12D4D0095DA21 /* CharacterViewModel.swift */; };
 		84A0BED126C12DD20095DA21 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BED026C12DD20095DA21 /* DataManager.swift */; };
 		84A1877726CA7863001C5024 /* CharactersTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1877626CA7863001C5024 /* CharactersTableViewModel.swift */; };
@@ -53,6 +55,8 @@
 		8468CE8326BD4DBB001F73FA /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		848FAB2226C29F73002B8D62 /* CharactersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewController.swift; sourceTree = "<group>"; };
 		848FAB2426C29FF1002B8D62 /* CharactersTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableView.swift; sourceTree = "<group>"; };
+		8497327D26D3862000DA98E7 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		8497327F26D3863800DA98E7 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		84A0BECE26C12D4D0095DA21 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		84A0BED026C12DD20095DA21 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		84A1877626CA7863001C5024 /* CharactersTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewModel.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 				8468CE5C26BD456C001F73FA /* CharacterViewController.swift */,
 				848FAB2226C29F73002B8D62 /* CharactersTableViewController.swift */,
 				84A70EFF26CD2773004DE32A /* CharacterPreviewController.swift */,
+				8497327D26D3862000DA98E7 /* CollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 			children = (
 				8468CE8326BD4DBB001F73FA /* CharacterView.swift */,
 				848FAB2426C29FF1002B8D62 /* CharactersTableView.swift */,
+				8497327F26D3863800DA98E7 /* CollectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,10 +323,12 @@
 				8468CE5D26BD456C001F73FA /* CharacterViewController.swift in Sources */,
 				8468CE5926BD456C001F73FA /* AppDelegate.swift in Sources */,
 				8468CE7D26BD4937001F73FA /* Location.swift in Sources */,
+				8497327E26D3862000DA98E7 /* CollectionViewController.swift in Sources */,
 				84A0BECF26C12D4D0095DA21 /* CharacterViewModel.swift in Sources */,
 				84EC126A26CFA4E4006ABF7B /* CharacterPreviewModel.swift in Sources */,
 				8468CE7B26BD491F001F73FA /* Episode.swift in Sources */,
 				8468CE5B26BD456C001F73FA /* SceneDelegate.swift in Sources */,
+				8497328026D3863800DA98E7 /* CollectionView.swift in Sources */,
 				848FAB2526C29FF1002B8D62 /* CharactersTableView.swift in Sources */,
 				848FAB2326C29F73002B8D62 /* CharactersTableViewController.swift in Sources */,
 				8468CE8126BD4A3F001F73FA /* Extensions.swift in Sources */,
