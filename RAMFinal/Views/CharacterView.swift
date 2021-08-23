@@ -50,14 +50,15 @@ class CharacterView: UIView {
         // Button od przechodzenia do tableview
         self.addSubview(self.goToTV)
         self.goToTV.translatesAutoresizingMaskIntoConstraints = false
-        self.goToTV.backgroundColor = .buttonBackground
         self.goToTV.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.goToTV.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+        let image  = UIImage(named: "list")
+        self.goToTV.setBackgroundImage(image, for: .normal)
         self.goToTV.heightAnchor.constraint(equalToConstant: 60).isActive = true
         self.goToTV.addTarget(self, action: #selector(goToTVButtonPressed(_:)), for: .touchUpInside)
-        self.goToTV.setBackgroundImage(UIImage(systemName: "list.dash"), for: .normal)
         self.goToTVWidth = self.goToTV.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.15)
         self.goToTVWidth.isActive = true
+        self.goToTV.backgroundColor = .buttonBackground
 
         
         //Button od przechodzenia do collectionView
@@ -80,8 +81,7 @@ class CharacterView: UIView {
         self.characterLabel.trailingAnchor.constraint(equalTo: self.goToTV.leadingAnchor).isActive = true
         self.characterLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
         self.characterLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        self.characterLabel.font = self.characterLabel.font.withSize(40.0)
-        self.characterLabel.font = UIFont.init(name: "data-latin", size: 25.0)
+        //self.characterLabel.font = self.characterLabel.font.withSize(40.0)
         self.characterLabel.numberOfLines = 0
         
         
