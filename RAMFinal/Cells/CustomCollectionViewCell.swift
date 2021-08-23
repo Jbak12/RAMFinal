@@ -3,9 +3,11 @@ import UIKit
 class CustomCollectionViewCell: UICollectionViewCell {
     static let identifier = "CustomCollectionViewCell"
     
+    
     private let myImageView : UIImageView = {
        let imageView = UIImageView()
-        imageView.image  = UIImage(named: "ogurek")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        //imageView.image  = UIImage(named: "ogurek")
         imageView.backgroundColor = .blue
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -14,6 +16,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     private let myLabel : UILabel = {
        let myLabel = UILabel()
+        myLabel.translatesAutoresizingMaskIntoConstraints = false
         myLabel.backgroundColor = .green
         myLabel.text  = "Cokolwiek"
         myLabel.textAlignment = .center
@@ -21,30 +24,37 @@ class CustomCollectionViewCell: UICollectionViewCell {
     }()
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
-        contentView.backgroundColor = . systemRed
-        contentView.backgroundColor = .basicBackground
-        contentView.addSubview(myLabel)
-        contentView.addSubview(myImageView)
-        contentView.clipsToBounds = true
+        super.init(frame: .zero)
+        self.setUp()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    override func layoutSubviews() {
+    
+    private func setUp() {
+        contentView.backgroundColor = .basicBackground
+        contentView.clipsToBounds = true
         
-        myLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(myLabel)
         myLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         myLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         myLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         myLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3).isActive = true
-
-        myImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        contentView.addSubview(myImageView)
         myImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         myImageView.bottomAnchor.constraint(equalTo: self.myLabel.topAnchor).isActive = true
         myImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        super.layoutSubviews()
+        
     }
     
+    public func configure(label: String, image: UIImage){
+        myLabel.text = label
+        myImageView.image = image
+    }
+    
+//     override func prepareForReuse() {
+//        myLabel.text = nil
+//    }
 }

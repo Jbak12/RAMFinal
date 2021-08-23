@@ -1,50 +1,71 @@
 import Foundation
 import UIKit
 
-class CollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class CollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    private var collectionView : UICollectionView?
+    private var collectionView : CollectionView
+    
+    init(){
+        collectionView = CollectionView(frame: UIScreen.main.bounds)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        collectionView.collectionView.delegate = self
+        collectionView.collectionView.dataSource = self
         self.title = "CollectionView"
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        let layout  = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 5
-        layout.minimumInteritemSpacing = 11
-        
-        layout.itemSize = CGSize(width: view.frame.size.width/3 - 10, height: view.frame.size.width/3 - 10)
-        
-        collectionView = UICollectionView(frame: .zero,collectionViewLayout: layout)
-        guard let collectionView = collectionView else {return}
-        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.identifier )
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .basicBackground
-        collectionView.frame = view.bounds
         
     }
-    var counter = 30
- 
+    
+    override func loadView() {
+        view = self.collectionView
+    }
+   
+    var imageTab = Array(repeating: UIImage(named: "ogurek"), count: 30)
+    var imageTab2 = Array(repeating: UIImage(named: "ogurek"), count: 30)
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return counter
+       // print("COUNTER!!!!: \(counter)")
+        return imageTab.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath as IndexPath) as! CustomCollectionViewCell
+        cell.configure(label: "Custom: \(indexPath.row)", image: imageTab[indexPath.row]!)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("\(indexPath.row) : \(counter)")
-        if indexPath.row >= counter - 3 {
-            counter += 20
-            collectionView.reloadData()
+        //if lastBiggest == max(indexPath.row, lastBiggest) {
+        print("\(indexPath.row) : \(imageTab.count)")
+        //guard let cell = cell as? CustomCollectionViewCell else { return }
+        //cell.configure(label: "Custom: \(indexPath.row)")
+        if indexPath.row >= imageTab.count - 6 {
+            imageTab += imageTab2
+            refreshData()
         }
-        
+        //}
+    }
+    func refreshData(){
+        self.collectionView.collectionView.reloadData()
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = CGFloat(floorf(Float(collectionView.bounds.width / 3 ) - 10))
+        return CGSize(width: width, height: width)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 11
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
 }
+
