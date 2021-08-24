@@ -8,7 +8,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         //imageView.image  = UIImage(named: "ogurek")
-        imageView.backgroundColor = .blue
+        imageView.backgroundColor = .blue.withAlphaComponent(0.5)
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
@@ -16,8 +16,11 @@ class CustomCollectionViewCell: UICollectionViewCell {
     
     private let myLabel : UILabel = {
        let myLabel = UILabel()
+        //myLabel.lineBreakMode = .byClipping
+        myLabel.adjustsFontSizeToFitWidth = true
+        myLabel.minimumScaleFactor = 0.2
         myLabel.translatesAutoresizingMaskIntoConstraints = false
-        myLabel.backgroundColor = .green
+        myLabel.backgroundColor = .green.withAlphaComponent(0.4)
         myLabel.text  = "Cokolwiek"
         myLabel.textAlignment = .center
         return myLabel
@@ -33,7 +36,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     }
     
     private func setUp() {
-        contentView.backgroundColor = .basicBackground
+        contentView.backgroundColor = .gray.withAlphaComponent(0.5)
         contentView.clipsToBounds = true
         
         contentView.addSubview(myLabel)

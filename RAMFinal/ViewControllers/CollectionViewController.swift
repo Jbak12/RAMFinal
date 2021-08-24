@@ -27,17 +27,17 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         view = self.collectionView
     }
    
-    var imageTab = Array(repeating: UIImage(named: "ogurek"), count: 30)
-    var imageTab2 = Array(repeating: UIImage(named: "ogurek"), count: 30)
+    var imageTab = Array(repeating: UIImage(named: "ogurek"), count: 34)
+    var imageTab2 = Array(repeating: UIImage(named: "ogurek"), count: 34)
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       // print("COUNTER!!!!: \(counter)")
+        print("AKTUALNIE W COLLECTIONVIEW: \(imageTab.count)")
         return imageTab.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath as IndexPath) as! CustomCollectionViewCell
-        cell.configure(label: "Custom: \(indexPath.row)", image: imageTab[indexPath.row]!)
+        cell.configure(label: "Character no. \(indexPath.row)", image: imageTab[indexPath.row]!)
         return cell
     }
     
@@ -45,13 +45,14 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         //if lastBiggest == max(indexPath.row, lastBiggest) {
         print("\(indexPath.row) : \(imageTab.count)")
         //guard let cell = cell as? CustomCollectionViewCell else { return }
-        //cell.configure(label: "Custom: \(indexPath.row)")
+        //cell.configure(label: "Custom: \(indexPath.row)" , image: imageTab[indexPath.row]!)
         if indexPath.row >= imageTab.count - 6 {
             imageTab += imageTab2
             refreshData()
         }
         //}
     }
+    
     func refreshData(){
         self.collectionView.collectionView.reloadData()
     }
