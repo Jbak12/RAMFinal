@@ -14,6 +14,9 @@ protocol ApiModelProtocol {
 // MARK: - Character
 //Users/admin/Desktop/RAMFinal/RAMFinal/ViewControllers/CharacterViewController.swift:            self?.viewModel.drawData()
 protocol CharacterViewModelType: AnyObject {
+    
+    init(fixedCharacter: Character?)
+    
     var output: CharacterViewControllerType? { get set }
     var name: String? { get }
     var imageUrl: URL? { get }
@@ -24,6 +27,7 @@ protocol CharacterViewModelType: AnyObject {
     var status: String {get}
     var firstEpisode: String {get}
     var tableViewModel: CharactersTableViewModelType {get}
+    func didLoadView()
     func drawData()
     func saveData(image: UIImage?)
     func check() -> Bool
@@ -71,4 +75,26 @@ protocol CharactersTableViewControllerType: AnyObject {
 protocol ViewBackend {
     func initiateSave()
     func goToCV()
+}
+
+protocol CharactersCollectionOutputType: AnyObject {
+    var viewModel: CharactersCollectionViewModelType { get set }
+    
+    init(viewModel: CharactersCollectionViewModelType)
+    
+    func didLoadNextPage()
+}
+
+protocol CharactersCollectionViewModelType: AnyObject {
+    var characters : [Character] {get}
+    var output: CharactersCollectionOutputType? { get set}
+    var isBusyFetchingData: Bool { get set }
+    
+    var numberOfItems: Int { get }
+    func characterImageUrl(atIndex: Int) -> URL
+    func characterName(atIndex: Int) -> String
+    func characterViewModel(atIndex: Int) -> CharacterViewModelType?
+
+    func viewIsLoaded() // kopiesz po 1. strone paginacji
+    func loadMoreData() // kopiesz po n-tą strone paginacji
 }

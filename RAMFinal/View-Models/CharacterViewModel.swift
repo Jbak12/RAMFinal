@@ -4,7 +4,10 @@ import PromiseKit
 
 class CharacterViewModel: CharacterViewModelType {
     
-    
+    required init(fixedCharacter: Character?) {
+        randCharater = fixedCharacter
+    }
+        
     weak var output: CharacterViewControllerType?
     
     private var odcinek: Episode? {
@@ -100,6 +103,13 @@ class CharacterViewModel: CharacterViewModelType {
     var tableViewModel: CharactersTableViewModelType {
         return CharactersTableViewModel()
     }
+    
+    func didLoadView() {
+        if randCharater == nil {
+            drawData()
+        }
+    }
+
     
     func drawData() {
         self.output?.setLoading(isLoading: true)

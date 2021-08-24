@@ -21,7 +21,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
         myLabel.minimumScaleFactor = 0.2
         myLabel.translatesAutoresizingMaskIntoConstraints = false
         myLabel.backgroundColor = .green.withAlphaComponent(0.4)
-        myLabel.text  = "Cokolwiek"
         myLabel.textAlignment = .center
         return myLabel
     }()

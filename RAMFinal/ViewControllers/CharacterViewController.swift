@@ -93,13 +93,13 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel.drawData()
+        self.viewModel.didLoadView()
         self.bindViewWithController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func disableSaveButton() {
@@ -111,7 +111,8 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         self.myView.saveButton.backgroundColor = .buttonBackground
     }
     func goToCollection() {
-        let CVC = CollectionViewController()
+        let collectionViewModel = CharactersCollectionViewModel()
+        let CVC = CollectionViewController(viewModel: collectionViewModel)
         self.navigationController?.pushViewController(CVC, animated: true)
     }
 }

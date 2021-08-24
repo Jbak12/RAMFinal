@@ -244,7 +244,7 @@ class CharacterView: UIView {
     }
     
     @objc private func saveToCD() {
-        print("COKOLWIEK")
+        print("POSTAC ZAPISANA")
         self.saveButton.isEnabled = false
         self.saveButton.backgroundColor = .gray
         self.VCp.initiateSave()
