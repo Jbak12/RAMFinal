@@ -23,11 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
      
         
         let tableViewModel = CharactersTableViewModel()
-        let viewModel = CharacterViewModel(fixedCharacter: nil)
+        let viewModel = CharacterViewModel(fixedCharacter: nil, comesFromCollection: false)
         let tabVC = CharactersTableViewController(viewModel: tableViewModel)
         let vc = CharacterViewController(viewModel: viewModel)
         vc.title = "VC"
-
         let navigationViewController = UINavigationController(rootViewController: vc)
         navigationViewController.navigationBar.barTintColor = .basicBackground
 

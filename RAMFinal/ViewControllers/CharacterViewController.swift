@@ -93,6 +93,7 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.viewModel.didLoadView()
         self.bindViewWithController()
     }
@@ -105,8 +106,12 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         } else{
             self.enableSaveButton()
         }
+        if self.viewModel.comesFromCollection == true {
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        } else {
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }
         
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func disableSaveButton() {
@@ -120,6 +125,11 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     func goToCollection() {
         let collectionViewModel = CharactersCollectionViewModel()
         let CVC = CollectionViewController(viewModel: collectionViewModel)
+        CVC.navigationController?.setNavigationBarHidden(true, animated: true)
+        let backIcon = UIImage(systemName: "person.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        let backBarItem = UIBarButtonItem(title: "BACL", image: backIcon, primaryAction: nil, menu: nil)
+        CVC.navigationItem.backBarButtonItem = backBarItem
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.pushViewController(CVC, animated: true)
     }
 }

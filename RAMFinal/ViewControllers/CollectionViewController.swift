@@ -30,10 +30,10 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.collectionView.delegate = self
         collectionView.collectionView.dataSource = self
         self.title = "All Characters"
-        let backIcon = UIImage(systemName: "person.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-        self.navigationController?.navigationBar.backIndicatorImage = backIcon
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backIcon
-        //self.navigationController?.setNavigationBarHidden(false, animated: true)
+//        let backIcon = UIImage(systemName: "person.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+//        let backBarItem = UIBarButtonItem(title: "BACL", image: backIcon, primaryAction: nil, menu: nil)
+//        self.navigationItem.backBarButtonItem = backBarItem
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
     
@@ -57,6 +57,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let viewModel = self.viewModel.characterViewModel(atIndex: indexPath.item){
+            viewModel.comesFromCollection = true
         let vc = CharacterViewController(viewModel: viewModel)
             if let characterView = vc.view as? CharacterView {
                 characterView.setButtonsHidden(true)

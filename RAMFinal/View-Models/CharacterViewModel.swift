@@ -4,9 +4,13 @@ import PromiseKit
 
 class CharacterViewModel: CharacterViewModelType {
     
-    required init(fixedCharacter: Character?) {
+    var comesFromCollection: Bool
+    
+    required init(fixedCharacter: Character?, comesFromCollection: Bool) {
         randCharater = fixedCharacter
+        self.comesFromCollection = comesFromCollection
     }
+    
         
     weak var output: CharacterViewControllerType?
     

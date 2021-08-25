@@ -32,7 +32,7 @@ class CharactersCollectionViewModel: CharactersCollectionViewModelType {
     
     func characterViewModel(atIndex: Int) -> CharacterViewModelType? {
         guard characters.count > atIndex else { return nil }
-        return CharacterViewModel(fixedCharacter: characters[atIndex])
+        return CharacterViewModel(fixedCharacter: characters[atIndex], comesFromCollection: true)
     }
     func viewIsLoaded() {
         loadMoreData()

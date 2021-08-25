@@ -15,9 +15,10 @@ protocol ApiModelProtocol {
 //Users/admin/Desktop/RAMFinal/RAMFinal/ViewControllers/CharacterViewController.swift:            self?.viewModel.drawData()
 protocol CharacterViewModelType: AnyObject {
     
-    init(fixedCharacter: Character?)
+    init(fixedCharacter: Character? , comesFromCollection: Bool)
     
     var output: CharacterViewControllerType? { get set }
+    var comesFromCollection: Bool {get set}
     var name: String? { get }
     var imageUrl: URL? { get }
     var gender: String { get }
