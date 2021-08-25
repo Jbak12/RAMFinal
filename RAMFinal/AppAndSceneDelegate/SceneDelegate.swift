@@ -22,17 +22,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
      
         
-        let tableViewModel = CharactersTableViewModel()
+        //let tableViewModel = CharactersTableViewModel()
         let viewModel = CharacterViewModel(fixedCharacter: nil, comesFromCollection: false)
-        let tabVC = CharactersTableViewController(viewModel: tableViewModel)
+        //let tabVC = CharactersTableViewController(viewModel: tableViewModel)
         let vc = CharacterViewController(viewModel: viewModel)
         vc.title = "VC"
         let navigationViewController = UINavigationController(rootViewController: vc)
         navigationViewController.navigationBar.barTintColor = .basicBackground
 
-        let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([navigationViewController, tabVC], animated: false)
-        tabBarController.tabBar.isTranslucent = false
+
         
         window?.rootViewController = navigationViewController
         window?.makeKeyAndVisible()
