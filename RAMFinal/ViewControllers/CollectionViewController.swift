@@ -30,11 +30,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.collectionView.delegate = self
         collectionView.collectionView.dataSource = self
         self.title = "All Characters"
-//        let backIcon = UIImage(systemName: "person.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-//        let backBarItem = UIBarButtonItem(title: "BACL", image: backIcon, primaryAction: nil, menu: nil)
-//        self.navigationItem.backBarButtonItem = backBarItem
-//        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func loadView() {

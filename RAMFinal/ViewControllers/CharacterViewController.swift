@@ -125,11 +125,7 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     func goToCollection() {
         let collectionViewModel = CharactersCollectionViewModel()
         let CVC = CollectionViewController(viewModel: collectionViewModel)
-        CVC.navigationController?.setNavigationBarHidden(true, animated: true)
-        let backIcon = UIImage(systemName: "person.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-        let backBarItem = UIBarButtonItem(title: "BACL", image: backIcon, primaryAction: nil, menu: nil)
-        CVC.navigationItem.backBarButtonItem = backBarItem
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        //self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.pushViewController(CVC, animated: true)
     }
 }
