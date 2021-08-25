@@ -24,7 +24,6 @@ extension Episode: ApiModelProtocol{
     }
 }
 
-// Utils
 extension Episode {
     var numberOfCharacters: Int {
         characters.count

@@ -46,7 +46,9 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.identifier, for: indexPath as IndexPath) as! CustomCollectionViewCell
-        cell.configure(label: "name: \(self.viewModel.characterName(atIndex: indexPath.item))", image: UIImage())
+        if let url = URL(string: "https://rickandmortyapi.com/api/character/avatar/\(indexPath.item + 1).jpeg") {
+            cell.configure(imageName: url)
+        }
         return cell
     }
     
@@ -55,6 +57,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         let vc = CharacterViewController(viewModel: viewModel)
             if let characterView = vc.view as? CharacterView {
                 characterView.setButtonsHidden(true)
+                vc.reloadView()
             }
             
         self.navigationController?.pushViewController(vc, animated: true)

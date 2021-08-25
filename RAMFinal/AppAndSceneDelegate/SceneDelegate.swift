@@ -25,8 +25,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tableViewModel = CharactersTableViewModel()
         let viewModel = CharacterViewModel(fixedCharacter: nil)
         let tabVC = CharactersTableViewController(viewModel: tableViewModel)
-//        let collectionViewModel = CharactersCollectionViewModel()
-//        let ColVC = CollectionViewController(viewModel: collectionViewModel)
         let vc = CharacterViewController(viewModel: viewModel)
         vc.title = "VC"
 

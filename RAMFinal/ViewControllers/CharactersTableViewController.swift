@@ -1,8 +1,11 @@
 import UIKit
 class CharactersTableViewController : UIViewController, CharactersTableViewControllerType {
+    
+    
     var myTabView :  CharactersTableView!
     var viewModel: CharactersTableViewModelType
-   
+    //var charView: GiveAccesToView
+    
     required init(viewModel: CharactersTableViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -22,7 +25,6 @@ class CharactersTableViewController : UIViewController, CharactersTableViewContr
         self.myTabView.tableView.delegate = self
         
         self.myTabView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "kReuseIdentifier")
-//        self.myTabView.tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCellReuseIdentifier")
     }
     
     override func viewDidLoad() {
@@ -73,9 +75,18 @@ extension CharactersTableViewController: UITableViewDelegate, UITableViewDataSou
         
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if indexPath.row == tableVM.CharactersArray.count - 1 {
-//            // load more
-//        }
-//    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
+                print(self.viewModel.characters.count)
+                context.delete(self.viewModel.characters[indexPath.row])
+                (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+                if let characters = try? context.fetch(CDCharacter.fetchRequest()) as? [CDCharacter]{
+                    self.viewModel.characters = characters
+                }
+                self.myTabView.tableView.reloadData()
+            }
+            
+        }
+    }
 }

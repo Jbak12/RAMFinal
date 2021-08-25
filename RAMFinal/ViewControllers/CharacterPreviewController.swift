@@ -11,9 +11,6 @@ class CharacterPreviewController: UIViewController {
     
     var previewView: CharacterView!
     var viewModel : CharacterPreviewModelType!
-    
-    //init(viewModel)
-    
     override func loadView() {
         self.previewView = CharacterView(frame: UIScreen.main.bounds)
         self.view = self.previewView

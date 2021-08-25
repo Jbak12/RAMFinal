@@ -20,7 +20,6 @@ class CharacterViewModel: CharacterViewModelType {
             self.output?.reloadView()
         }
     }
-    
     private var randCharater : Character? {
         didSet {
             self.output?.reloadView()

@@ -23,7 +23,6 @@ class CharactersCollectionViewModel: CharactersCollectionViewModelType {
     var nextPage: Int? = 1
     
     func characterImageUrl(atIndex: Int) -> URL {
-        
         return URL(string: "")!
     }
     
@@ -36,10 +35,7 @@ class CharactersCollectionViewModel: CharactersCollectionViewModelType {
         return CharacterViewModel(fixedCharacter: characters[atIndex])
     }
     func viewIsLoaded() {
-        
         loadMoreData()
-        
-    
     }
     
     func loadMoreData() {
@@ -48,8 +44,7 @@ class CharactersCollectionViewModel: CharactersCollectionViewModelType {
         dataManager.getPage(nextPage, type: Character.self)
             .ensure {
                 self.isBusyFetchingData = false
-            }
-            .done { page in
+            }.done { page in
             self.characters.append(contentsOf: page.results)
             self.output?.didLoadNextPage()
             

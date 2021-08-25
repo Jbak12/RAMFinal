@@ -93,7 +93,8 @@ class CharacterView: UIView {
     self.scrollView.topAnchor.constraint(equalTo: self.characterLabel.bottomAnchor).isActive = true
     self.scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
     self.scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        
+    
+    //stackview na labelki
     self.scrollView.addSubview(stackView)
     self.stackView.translatesAutoresizingMaskIntoConstraints = false
     self.stackView.axis = .vertical
@@ -203,7 +204,7 @@ class CharacterView: UIView {
     
 
         
-    //przycisk od losowania ziomali
+    //przycisk od losowania postaci
     self.buttonsStackView.addArrangedSubview(drawButton)
     self.drawButton.translatesAutoresizingMaskIntoConstraints = false
     self.drawButton.setTitle("DRAW", for: .normal)
@@ -212,7 +213,7 @@ class CharacterView: UIView {
     self.drawButton.layer.cornerRadius = 10
     self.drawButton.setTitle("OFF", for: .disabled)
     
-    //przycisk od zapisywania ziomali
+    //przycisk od zapisywania postaci
     self.buttonsStackView.addArrangedSubview(saveButton)
     self.saveButton.translatesAutoresizingMaskIntoConstraints = false
     self.saveButton.setTitle("SAVE", for: .normal)
@@ -263,5 +264,11 @@ extension CharacterView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //    print("Content offset y: \(scrollView.contentOffset.y)")
     }
-    
+}
+
+extension CharacterView: GiveAccesToView {
+    func enableButton() {
+        self.saveButton.isEnabled = true
+        self.saveButton.backgroundColor = .gray
+    }
 }
