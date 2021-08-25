@@ -29,8 +29,11 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         self.viewModel.viewIsLoaded()
         collectionView.collectionView.delegate = self
         collectionView.collectionView.dataSource = self
-        self.title = "CollectionView"
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.title = "All Characters"
+        let backIcon = UIImage(systemName: "person.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        self.navigationController?.navigationBar.backIndicatorImage = backIcon
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backIcon
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
     
