@@ -31,6 +31,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.collectionView.dataSource = self
         self.title = "All Characters"
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        //
     }
     
     override func loadView() {
