@@ -4,7 +4,6 @@ class CharactersTableViewController : UIViewController, CharactersTableViewContr
     
     var myTabView :  CharactersTableView!
     var viewModel: CharactersTableViewModelType
-    //var charView: GiveAccesToView
     
     required init(viewModel: CharactersTableViewModelType) {
         self.viewModel = viewModel

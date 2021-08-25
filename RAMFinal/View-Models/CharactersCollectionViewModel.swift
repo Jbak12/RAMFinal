@@ -44,7 +44,7 @@ class CharactersCollectionViewModel: CharactersCollectionViewModelType {
         dataManager.getPage(nextPage, type: Character.self)
             .ensure {
                 self.isBusyFetchingData = false
-            }.done { page in
+            }.done{ page in
             self.characters.append(contentsOf: page.results)
             self.output?.didLoadNextPage()
             

@@ -99,6 +99,13 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if self.viewModel.check() {
+            self.disableSaveButton()
+        } else{
+            self.enableSaveButton()
+        }
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     

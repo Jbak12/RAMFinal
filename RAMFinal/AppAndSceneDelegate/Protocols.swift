@@ -77,9 +77,6 @@ protocol ViewBackend {
     func goToCV()
 }
 
-protocol GiveAccesToView {
-    func enableButton()
-}
 
 protocol CharactersCollectionOutputType: AnyObject {
     var viewModel: CharactersCollectionViewModelType { get set }

@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class CharacterView: UIView {
+class CharacterView: UIView, UIScrollViewDelegate {
     
     var VCp : ViewBackend!
     
@@ -254,21 +254,5 @@ class CharacterView: UIView {
     @objc private func goToCVfunc (){
         self.VCp.goToCV()
     }
-    
-    
-}
 
-
-extension CharacterView: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//    print("Content offset y: \(scrollView.contentOffset.y)")
-    }
-}
-
-extension CharacterView: GiveAccesToView {
-    func enableButton() {
-        self.saveButton.isEnabled = true
-        self.saveButton.backgroundColor = .gray
-    }
 }
