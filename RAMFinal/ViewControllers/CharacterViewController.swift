@@ -98,6 +98,11 @@ class CharacterViewController: UIViewController, CharacterViewControllerType {
         self.bindViewWithController()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+       // self.myView.setButtonsHidden(true, withAnimation: true)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

@@ -1,12 +1,14 @@
 import Foundation
 import UIKit
 
+typealias buttonAction = () -> Void
+
 class CharacterView: UIView, UIScrollViewDelegate {
     
     var VCp : ViewBackend!
     
-    var onDrawButtonPress: (() -> Void)?
-    var onSaveButtonPress: (() -> Void)?
+    var onDrawButtonPress: (buttonAction)?
+    var onSaveButtonPress: (buttonAction)?
     
     lazy var scrollView = UIScrollView()
     
@@ -33,7 +35,6 @@ class CharacterView: UIView, UIScrollViewDelegate {
     lazy var goToCV = UIButton(type: .custom)
     
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -46,7 +47,7 @@ class CharacterView: UIView, UIScrollViewDelegate {
     
     private func setUp() {
     
-        self.backgroundColor = UIColor(red: 0.31, green: 0.488, blue: 0.497, alpha: 1)
+    self.backgroundColor = UIColor(red: 0.31, green: 0.488, blue: 0.497, alpha: 1)
         
     // Button od przechodzenia do tableview
     self.addSubview(self.goToTV)
@@ -223,13 +224,20 @@ class CharacterView: UIView, UIScrollViewDelegate {
     self.saveButton.addTarget(self, action: #selector(saveToCD), for: .touchUpInside)
     }
     
-    func setButtonsHidden(_ areHidden: Bool) {
-    self.buttonsStackViewHeight.constant = 0
-    self.buttonsStackView.isHidden = areHidden
+    func setButtonsHidden(_ areHidden: Bool, withAnimation: Bool = false) {
+        self.buttonsStackViewHeight.constant = 0
+        self.buttonsStackView.isHidden = areHidden
 
-    self.goToTVWidth.constant = areHidden ? 0 : UIScreen.main.bounds.width * 0.15
-    self.goToCVWidth.constant = areHidden ? 0 : UIScreen.main.bounds.width * 0.15
-    self.superview?.layoutIfNeeded()
+        self.goToTVWidth.constant = areHidden ? 0 : UIScreen.main.bounds.width * 0.15
+        self.goToCVWidth.constant = areHidden ? 0 : UIScreen.main.bounds.width * 0.15
+        if withAnimation {
+            UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut) {
+                self.superview?.layoutIfNeeded()
+            } completion: { ziomal in
+                print("zanimowano guziki")
+            }
+        }
+
     }
     
     @objc private func drawButtonPressed(_ sender: Any) {
@@ -254,5 +262,6 @@ class CharacterView: UIView, UIScrollViewDelegate {
     @objc private func goToCVfunc (){
         self.VCp.goToCV()
     }
+    
 
 }

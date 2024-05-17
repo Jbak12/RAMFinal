@@ -33,6 +33,7 @@ class CharacterPreviewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.previewView.setButtonsHidden(true)
     }
+    
     func refreshView() {
         self.previewView.characterImage.image = self.viewModel.image
         self.previewView.genderLabel.gender(self.viewModel.gender)

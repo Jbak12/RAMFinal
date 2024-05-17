@@ -51,7 +51,7 @@ class CharacterViewModel: CharacterViewModelType {
     var gender: String {
         if let gender = randCharater?.gender {
             return gender
-        }else{
+        } else {
             return "no gender "
         }
         
@@ -59,21 +59,21 @@ class CharacterViewModel: CharacterViewModelType {
     var species: String {
         if let species = randCharater?.species{
             return species
-        }else{
+        } else {
             return "no species"
         }
     }
     var episodeCounter: Int{
         if let episodecount = randCharater?.episode.count{
             return episodecount
-        }else{
+        } else {
             return 123
         }
     }
     var originLocationName: String{
         if let originlocation = randCharater?.origin.name{
             return originlocation
-        }else{
+        } else {
             return "ebebebe"
         }
     }
